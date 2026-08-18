@@ -1,0 +1,84 @@
+# Inventário 86x11
+
+1	Inventário
+4	Setor	Ítem			Quantidade		Setor	Ítem			Quantidade
+5	Papelaria	Pincéis			13.0		Iluminação	Varais de Luzes com lâmpadas			5.0
+6		Rolos de Pintura			7.0			Fita Led			1.0
+7		Suporte para Tinta			1.0			Canudos de luz			2.0
+8		Tinta Guache Preta			2.0			Holofotes			2.0
+9		Tinta Guache Vermelha			1.0			Flamingo			1.0
+10		Tinta Guache Amarela			1.0			Coqueiro			1.0
+11		Tinta Guache Laranja			1.0			Pisca de Pilha Colorido			2.0
+12		Tinta Guache Azul			1.0			Pisca de Tomada Colorido			4.0
+13		Tinta Guache Verde			1.0			Pisca de Tomada Branco			1.0
+14		Tinta Suvinil Amarelo			1.0			Quadro Recepção			1.0
+15		Tinta Suvinil Azul			1.0		Vasos e plantas	Festões de Natal			2.0
+16		Tinta Suvinil Laranja			1.0			Velas de Mesa			20.0
+17		Fitas de Setin Branca			4.0			Flores Variadas
+18		Fitas de Setin Amarela			2.0			Vasos com flores			11.0
+19		Fitas de Setin Vermelha			2.0			Potes de mesa			11.0
+20		Fitas de Setin Laranja			1.0			Pinhas
+21		Fitas de Setin Azul			1.0		Artigos de esporte	Barraca de Campo			1.0
+22		Fita Zebrada			3.0			Bomba de Ar			1.0
+23		Fita Zebrada com Cola			1.0			Cones Baixos			6.0
+24		Fita "Life is Good"			1.0			Buzinas			2.0
+25		Fitas Azuis			3.0			Apitos			2.0
+26		Fitas Vermelhas			2.0			Raquetes Tênis de Mesa			6.0
+27		Fitas Rosa			1.0			Suportes Para Rede de Tênis de Mesa			3.0
+28		Fitas Amarela			1.0			Redes de Tênis de Mesa			3.0
+29		Fitas Branca			1.0			Lanternas			3.0
+30		Rolos de Fita Dupla Face			3.0			Escada de Chão			1.0
+31		Rolos de Fita Crepe			5.0			Faixa de Capitao			1.0
+32		Rolo de Fita Durex			10.0		Fantasias	Potes de Sangue Falso			2.0
+33		Rolo de Cordão Palha			1.0			Óculos 3D			10.0
+34		Rolo de Corda			1.0			Chápeu de Palha			1.0
+35		Rolo de Barbante Branco			3.0			Chápeu de Caubói			1.0
+36		Rolo de Linha Amarela			2.0			Colares Havaianos			2.0
+37		Rolo de Linha Laranja			2.0		Decoração ambiente	Bandeira Conecte			1.0
+38		Rolo de Linha Branca			1.0			Roleta de sorteio			1.0
+39		Rolo de Nilon			3.0			Lousa de giz pequena			1.0
+40		Pacotes de Gliter Prata			2.0			Letras "conecte"			1.0
+41		Pacotes de Gliter Roxo			2.0			Teia falsa			1.0
+42		Pacotes de Gliter Azul Escuro			2.0			Correias de segurança
+43		Pacotes de Gliter Azul Claro			1.0			Relógio despertador			1.0
+44		Pacotes de Gliter Cobre			1.0			Campainha de atendimento			1.0
+45		Pacotes de Gliter Dourado			1.0			Cofre com moedas de ouro			1.0
+46		Kit de Gliters Variados			3.0			Bolinhas de gude
+47		Pacote de Bexiga amarela			1.0
+48		Pacote de Bexiga Verde			1.0
+49		Pacote de Bexiga Azul			2.0
+50		Pacote de Bexiga Branca			3.0
+51		Enchedores de Bexiga			3.0
+52		Varetas para Bexiga
+53		Pacotes de Cola Branca			5.0
+54		Pistolas de Cola Quente			2.0
+55		Tubos de Cola Quente Grande			10.0
+56		Tubos de Cola Quente Pequena			5.0
+57		Prancheta			1.0
+58		Pacotes de Giz Branco			2.0
+59		Grampeador Grande			1.0
+60		Grampeador Pequeno			1.0
+61		Grampos Grandes			2.0
+62		Grampos Pequenos			1.0
+63		Bloco de Notas			1.0
+64		Pacotes de Giz de Cera			2.0
+65		Pacote de Giz Pastel			1.0
+66		Pacote de Lápis de Cor			1.0
+67		Pacote de Alfinetes			1.0
+68		Estiletes			2.0
+69		Estojo com material de Escrita Diverso			1.0
+70		Tesouras			3.0
+71		Tesoura Zig-Zag			1.0
+72		Canetas Quardro Branco Cores Variadas			5.0
+73		Rolos de Papel Crempo (Rosa,Roxo,Branco,Amarelo,Verde)			diversos
+74		Folhas de EVA Amarelo			2.0
+75		Folha de EVA Vermelho			3.0
+76		Folha de EVA Branco			2.0
+77		Folha de EVA Preto			1.0
+78		Pacotes de Etiquetas			2.0
+79		Papel seda Branco e Preto			1.0
+80		Pacote Papel Holgráfico de Cores Variadas			1.0
+81		Folhas Papel Crafit Grande			14.0
+82		Rolos de Papel Alumínio			2.0
+83		Toalhas de Palha			3.0
+84		Papéis de Embrulho diversos			2.0

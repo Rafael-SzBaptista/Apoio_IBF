@@ -1,0 +1,43 @@
+# Comida - receitas 43x23
+
+1	Cardápio
+4	Bebida						Strogonoff de frango						Lanche natural						Coffe Break
+5	Íten	Quantidade p/pessoa		Onde comprar	Observações		Íten	Quantidade p/pessoa		Onde comprar	Observações		Íten	Quantidade p/pessoa		Onde comprar	Observações		Íten	Quantidade p/pessoa		Onde comprar	Observações
+6	Copos descartáveis	1,5 und		Atacadão			Batata palha	30g		Atacadão ou Dalbén			Lanche natural	3 metades		Atacadão ou Dalben	Servir cortados ao meio		Bebidas	200 ml		Atacadão ou Dalben
+7	Bebida	200ml		Atacadão, Dalben			Arroz	220g (81,5g cru)					Íten	Quantidade p/und					Café	50 ml			Levar chaleira elétrica para fazer na hora
+8	Íten	Destribuição					Peito de frango	250g (320g cru)		Açougue do Concon ou swift	Pegar já moído para strogonoff		Queijo mussarela	1 fatia					Bolo	1 fatia		Casa de bolos
+9	Coca zero	0.55					Molho	70g		Fazer (ingredientes no Atacadão ou Dalbén)	20g de ketchup + 40g de creme de leite		Alface	1 folha					Lanche	1 und		Atacadão ou Dalben	Metades
+10	Coca normal	0.15					Cebola	10g		Atacadão ou Dalbén	Para refogar com o frango		Tomate	1 rodela					Bebidas
+11	Sprit	0.15					Alho	8g (1 dente médio)			Para temperar o arroz		Pão caseirinho	2026-02-01 00:00					Íten	Destribuição
+12	Sucos	0.15					Azeite e sal	Suficiente para fritar a cebola e alho e salgar a comida		Temos guardado no armário da tenda			Maionese	8g					Suco de uva	0.4
+13																			Suco de laranja	0.35
+14	Chocolate quente						Cachorro quente						Pizza						Chá gelado	0.1
+15	Íten	Quantidade p/pessoa		Onde comprar	Observações		Íten	Quantidade p/pessoa		Onde comprar	Observações		Íten	Quantidade p/pessoa		Onde comprar	Observações		Água saborizada	0.15
+16	Água	200ml		Atacadão ou Dalben			Cachorro quente	2.0		Atacadão ou Dalben	Cada um monta o seu		Pizza	3 pedaços		Pizza mais - (19) 3289-0320 ou Nonna braçuda (19) 99585-7744	No pizza mais demora até 1h10 para ficar pronto		Bolo
+17	Leite em pó	40g					Íten	Quantidade p/und					Íten	Destribuição					Íten	Destribuição
+18	Chocolate em pó 50%	30g					Pão para cachorro quente	1.0					Frango com catupiry	0.3					Cenoura	0.6
+19	Leite condensado	20g					Salsicha	1.0					Lombinho	0.2					Chocolate	0.4
+20	Amido de milho	10g					Purê de batata	90g (60,2g cru)					Marguerita	0.2					Íten	Quantidade p/und
+21							Ketchup	15g											Pão de forma	1 und (um quadrado repartido em dois triângulos)
+22	Macarronada						Mostarda	15g					Salgadinhos						Presunto	1 fatia
+23	Íten	Quantidade p/pessoa		Onde comprar	Observações		Batata palha	15g					Íten	Quantidade p/pessoa		Onde comprar	Observações		Queijo	1 fatia
+24	Macarrão	450g (184g cru)		Atacadão ou Dalben	Cada um monta o seu								Salgadinhos	20 und		19 98196-1051	Não emitem nota fiscal, é preciso pagar com o dinheiro físico recolhido pelo Conecte
+25	Molho de tomate	70g					Hambúrguer						Íten	Destribuição					Picolé
+26	Molho branco	70g					Íten	Quantidade p/pessoa		Onde comprar	Observações		Risole de carne	0.3					Íten	Quantidade p/pessoa		Onde comprar	Observações
+27	Carne moída	50g					Hambúrguer	1 und		Açougue dos Concons (carne) Atacadão ou Dalben (restante)			Risole de presunto e queijo	0.3					Picolé	2 und		Sergel	O Caio Bueno  consegue comprar por um preço privilegiado
+28	Calabresa	30g					Íten	Quantidade p/und					Coxinha de frango	0.2					Íten	Destribuição
+29	Queijo parmesão ralado	15g					Carne	1 und					Bolinha de queijo	0.2					Chocolate	0.3
+30	Alho	8g (1 dente médio)					Queijo mussarela	2 fatias											Leite ninho	0.3
+31	Azeite e sal	-		Temos guardado no armário da tenda			Alface	2 folhas					Esfiha						Flocos	0.15
+32							Tomate	3 rodelas (um tomate médio rende cerca de 10 rodelas)					Íten	Quantidade p/pessoa		Onde comprar	Observações		Morango	0.15
+33							Cabola	1/3 rodelas (Uma cebola média rende cerca de 12 rodelas)					Esfiha	5.0		Art massas - (19) 3289-1185	Encomendar com antecedência		Limão	0.1
+34							Pão	1 und					Íten	Destribuição
+35							Ketchup	15g					Carne	0.4					Sorvete de massa
+36							Maionese	15g					Calabresa	0.2					Íten	Quantidade p/pessoa		Onde comprar	Observações
+37													Frango	0.4					Sorvete de massa	330ml		Sergel	O Caio Bueno  consegue comprar por um preço privilegiado
+38																			Casquinha de sorvete	1.0		Atacadão
+39													Pipoca salgada						Íten	Destribuição
+40													Íten	Quantidade p/pessoa		Onde comprar	Observações		Chocolate	0.4
+41													Milho para pipoca	50 g		Atacadão ou Dalben			Leite ninho	0.4
+42													Óleo	25 ml					Flocos	0.2
+43													Sazon pipoca	0,5 sachês

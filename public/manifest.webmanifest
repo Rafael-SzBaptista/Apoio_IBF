@@ -1,0 +1,26 @@
+{
+  "name": "Ministério Apoio",
+  "short_name": "Apoio",
+  "description": "Alimentação, decoração e finanças das programações dos jovens.",
+  "id": "/",
+  "start_url": "/inicio",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f8f4eb",
+  "theme_color": "#9a5a32",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "/clipboard_checklist.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/logo%20prancheta.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

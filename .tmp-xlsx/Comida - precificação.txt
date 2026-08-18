@@ -1,0 +1,62 @@
+# Comida - precificação 88x26
+
+1	Preços							Precificação
+4	Ingrediente		Quantidade	Unidade	Preço (R$)			Bebidas					Strogonoff de frango + bebidas					Lanche natural + Suco natural					Pipoca + chocolate quente
+5	Copos descartáveis		100.0	und	4.2			Ingrediente		Quantidade	Preço (R$)		Ingrediente		Quantidade	Preço (R$)		Ingrediente		Quantidade	Preço (R$)		Ingrediente		Quantidade	Preço (R$)
+6	Copos térmicos descartáveis		20.0	und	7.5			Bebidas		250.0	1.4		Batata palha		30.0	2.854285714		Pão caseiro		1.5	4.5		Milho para pipoca		50.0	0.46
+7	Pratos descartáveis		10.0	und	2.09			Copos descartáveis		2.0	0.084		Arroz branco		77.0	0.38423		Alface		3.0	1.2		Óleo		25.0	0.1997222222
+8	Garfos descartáveis		50.0	und	9.5			Total		1.484			Peito de frango		350.0	7.665		Tomate		3.0	0.5625		Tempero Sazon pipoca		0.5	0.2291666667
+9	Facas descartáveis		50.0	und	9.5								Creme de leite		40.0	0.538		Queijo mussarela		3.0	0.3602150538		Chocolate quente		250.0	4.918544304
+10	Colher plástica descartável		50.0	und	9.5			Suco de laranja natural					Ketchup		20.0	0.5463844797		Presunto		3.0	0.102		Taxa de segurança* (permite adição de 3 pessoas)		0.8711149789
+11	Pão de forma		15.0	Fatias	8.49			Ingrediente		Quantidade	Preço (R$)		Cebola		10.0	0.0529		Maionese		24.0	0.5293150685		Total		6.678548172
+12	Pão caseiro		9.0	und	27.0			Laranja pera		310.0	2.48		Alho		8.0	0.12		Prato descartável		1.0	0.209
+13	Pão para cachorro quente		6.0	und	6.98			Copos descartáveis		2.0	0.084		Bebidas		250.0	1.48		Suco de laranja natural		310.0	2.564		Coffe break
+14	Pão para hamburguer		6.0	und	4.99			Total		2.564			Prato descartável		1.0	0.209		Taxa de segurança* (permite adição de 3 pessoas)		1.504054518			Ingrediente		Quantidade	Preço (R$)
+15	Acém moído		1000.0	g	43.99								Taxa de segurança* (permite adição de 3 pessoas)		2.077470029			Total		11.53108464			Café solúvel extraforte		3.0	0.2154
+16	Peito de frango		1000.0	g	21.9			Chocolate quente					Total		15.92727022								Suco de uva		80.0	1.768888889
+17	Calabresa		1000.0	g	26.9			Ingrediente		Quantidade (g)	Preço (R$)							Pizza + bebidas (pizza mais)					Suco de Laranja		70.0	1.547777778
+18	Carne de hamburguer		1.0	und	4.8			Leite em pó		40.0	1.55		Cachorro quente + bebidas					Ingrediente		Quantidade	Preço (R$)		Chá gelado		20.0	0.1499
+19	Salsicha		50.0	und	28.8			Leite condensado		20.0	0.2835443038		Ingrediente		Quantidade	Preço (R$)		Pizza		20 fatias	81.0		Bolo		1.0	1.25
+20	Presunto		1000.0	g	34.0			Cacau em pó		30.0	2.385		Pão para cachorro quente		2.0	2.326666667				3 fatias	12.15		Pão de forma		1.0	0.566
+21	Queijo mussarela		62.0	Fatias	67.0			Amido de milho		10.0	0.325		Salsicha		2.0	1.152		Bebidas		250 ml	1.48		Presunto		1.0	0.034
+22	Queijo parmesão ralado		1000.0	g	89.9			Copos descartáveis de isopor		1.0	0.375		Batata (purê)		45.0	0.2241		Taxa de segurança* (permite adição de 3 pessoas)		2.0445			Queijo mussarela		1.0	1.080645161
+23	Arroz branco		1000.0	g	4.99			Total		4.918544304			Batata palha		30.0	2.854285714		Total		15.6745			Taxa de segurança* (permite adição de 3 pessoas)		0.9918917742
+24	Batata		1000.0	g	4.98								Ketchup		30.0	0.8195767196							Total		7.604503602
+25	Macarrão parafuso		500.0	g	3.99			Macarronada + bebidas					Mostarda		30.0	1.845882353		Pizza + bebidas (Nonna braçuda)
+26	Milho para pipoca		500.0	g	4.6			Ingrediente		Quantidade	Preço (R$)		Prato descartável		1.0	0.209		Ingrediente		Quantidade	Preço (R$)
+27	Batata palha		105.0	g	9.99			Macarrão parafuso		200g	1.6		Bebidas		250.0	1.48		Pizza		12 fatias	64.99		2 Picolés + suco natural
+28	Bolo		20.0	Fatias	25.0			Molho de tomate		70g	0.74		Taxa de segurança* (permite adição de 3 pessoas)		1.636726718					3 fatias	16.25		Ingrediente		Quantidade	Preço (R$)
+29	Leite em pó		400.0	g	15.5			Molho branco		70g	3.5		Total		12.54823817			Bebidas		250 ml	1.48		Picolé		1 und	2,5**
+30	Leite condensado		395.0	ml	5.6			Acém		50g	2.2							Taxa de segurança* (permite adição de 3 pessoas)		2.6595					2 und	5.0
+31	Chocolate em pó		200.0	g	15.9			Calabresa		30g	0.8		Hambúrguer + bebidas					Total		20.3895			Suco		310.0	2.56
+32	Creme  de leite		200.0	ml	2.69			Queijo parmessão ralado		15g	1.35		Ingrediente		Quantidade	Preço (R$)							Taxa de segurança* (permite adição de 3 pessoas)		1.134
+33	Amido de milho		200.0	g	6.5			Alho		8g	0.12		Carne para hamburguer		1.0	4.8		Salgados					Total		8.694
+34	Maionese		657.0	ml	14.49			Bebidas		250 ml	1.48		Queijo mussarela		2.0	2.161290323		Ingrediente		Quantidade	Preço (R$)
+35	Mostarda		255.0	ml	15.69			Prato descartável		1 und	0.209		Alface		2.0	0.8		Salgados		100 und	45.0		Sorvete de massa
+36	Ketchup		567.0	ml	15.49			Taxa de segurança* (permite adição de 3 pessoas)		1.79985			Tomate		3.0	0.5625				20 und	9.0		Ingrediente		Quantidade	Preço (R$)
+37	Molho de tomate		300.0	ml	3.19			Total		13.79885			Cebola		3.0	0.01587		Bebidas		250 ml	1.48		Sorvete de massa		2 L	35.0
+38	Molho branco		240.0	ml	11.99								Pão para hambúrguer		1.0	0.8316666667		Prato descartável		1.0	0.209				330 ml	5.78
+39	Óleo de milho		900.0	ml	7.19								Maionese		22.5	0.4962328767		Taxa de entrega (R$15,00)		1.0			Pote térmico descartável		1.0	0.375
+40	Alho		1000.0	g	15.0								Ketchup		15.0	0.4097883598		Taxa de segurança* (permite adição de 3 pessoas)		1.60335			Colher plástica descartável		1.0	0.19
+41	Cebola		1000.0	g	5.29								Prato descartável		1.0	0.209		Total		13.29235			Taxa de segurança* (permite adição de 3 pessoas)		0.95175
+42	Tempero Sazon pipoca		12.0	Sachês	5.5								Bebidas		250.0	1.48							Total		7.29675
+43	Alface		20.0	Folhas	8.0								Taxa de segurança* (permite adição de 3 pessoas)		1.764952234			Esfiha fechada +  bebida					* A taxa de segurança é calculada para permitir um estoque de segurança para algumas pessoas sem causar prejuízo caso este estoque não seja vendido
+44	Tomate		80.0	Fatias	15.0								Total		13.53130046			Ingrediente		Quantidade	Preço (R$)		** Até 20 unidades cada picolé custa R$3,50, a partir de 20 unidades cada picolé custa R$2,50
+45	Laranja pêra		1000.0	g	8.0													Esfiha fechada		1.0	2.6
+46	Suco de uva		900.0	ml	19.9															5.0	13.0
+47	Suco de laranja		900.0	ml	19.9													Bebidas		250 ml	1.48
+48	Chá gelado		2000.0	ml	14.99													Taxa de segurança* (permite adição de 3 pessoas)		2.172
+49	Café solúvel extraforte		500.0	g	35.9													Total		16.652
+51	Combo		Preço mínimo p/pessoa (R$)		Preço cobrado p/pessoa (R$)
+52	Macarronada + bebidas		15.0		25.0
+53	Strogonoff de frango + bebidas		20.0		25.0
+54	Cachorro quente + bebidas		15.0		20.0
+55	Hamburguer + bebidas		15.0		25.0
+56	Lanche natural + suco		15.0		15.0
+57	Pizza + bebidas		25.0		25.0
+58	Salgados + bebidas		15.0		20.0
+59	Esfihas + bebidas		20.0		20.0
+60	Pipoca + chocolate quente		10.0		15.0
+61	Coffe break		8.0		15.0
+62	Picolé + suco		10.0		15.0
+63	Sorvete de massa		10.0		15.0

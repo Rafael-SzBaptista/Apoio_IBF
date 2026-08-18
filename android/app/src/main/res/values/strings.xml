@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Apoio</string>
+    <string name="title_activity_main">Apoio</string>
+    <string name="package_name">br.igrejabatistafonte.apoio</string>
+    <string name="custom_url_scheme">br.igrejabatistafonte.apoio</string>
+</resources>

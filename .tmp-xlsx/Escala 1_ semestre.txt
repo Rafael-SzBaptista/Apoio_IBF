@@ -1,0 +1,34 @@
+# Escala 1° semestre 131x15
+
+1	Janeiro								Abril
+5	Dia	Local	Horário	Comida	Responsáveis		Observações		Dia	Local	Horário	Comida	Responsáveis		Observações
+6					Decoração	Alimentação							Decoração	Alimentação
+9	Fevereiro								Dia	Local	Horário	Comida	Responsáveis		Observações
+10													Decoração	Alimentação
+13	Dia	Local	Horário	Comida	Responsáveis		Observações		Dia	Local	Horário	Comida	Responsáveis		Observações
+14					Decoração	Alimentação							Decoração	Alimentação
+17	Dia	Local	Horário	Comida	Responsáveis		Observações		Dia	Local	Horário	Comida	Responsáveis		Observações
+18					Decoração	Alimentação							Decoração	Alimentação
+21	Dia	Local	Horário	Comida	Responsáveis		Observações		Maio
+22					Decoração	Alimentação
+25	Dia	Local	Horário	Comida	Responsáveis		Observações		Dia	Local	Horário	Comida	Responsáveis		Observações
+26					Decoração	Alimentação							Decoração	Alimentação
+29	Março								Dia	Local	Horário	Comida	Responsáveis		Observações
+30													Decoração	Alimentação
+33	Dia	Local	Horário	Comida	Responsáveis		Observações		Dia	Local	Horário	Comida	Responsáveis		Observações
+34					Decoração	Alimentação							Decoração	Alimentação
+37	Dia	Local	Horário	Comida	Responsáveis		Observações		Dia	Local	Horário	Comida	Responsáveis		Observações
+38					Decoração	Alimentação							Decoração	Alimentação
+41	Dia	Local	Horário	Comida	Responsáveis		Observações		Dia	Local	Horário	Comida	Responsáveis		Observações
+42					Decoração	Alimentação							Decoração	Alimentação
+45	Dia	Local	Horário	Comida	Responsáveis		Observações		Junho
+46					Decoração	Alimentação
+49									Dia	Local	Horário	Comida	Responsáveis		Observações
+50													Decoração	Alimentação
+53									Dia	Local	Horário	Comida	Responsáveis		Observações
+54													Decoração	Alimentação
+57									Dia	Local	Horário	Comida	Responsáveis		Observações
+58													Decoração	Alimentação
+61									Dia	Local	Horário	Comida	Responsáveis		Observações
+62													Decoração	Alimentação
+63									27.0			-	-	-

@@ -1,0 +1,40 @@
+# Escala 2° semestre 43x18
+
+1	Agosto								Outubro
+4	Start impulse + Conecte								Culto Conecte
+5	Dia	Local	Horário	Comida	Responsáveis		Observações		Dia	Local	Horário	Comida	Responsáveis		Observações
+6					Decoração	Alimentação							Decoração	Alimentação
+7	1.0	EJ/Sala 8/Quadra/Tenda	18h00	Hamburguer	Beatriz	-			3.0	EJ	19h00	Hamburguer	Beatriz	Rafael B
+8	Noite de jogos								Informal
+9	Dia	Local	Horário	Comida	Responsáveis		Observações		Dia	Local	Horário	Comida	Responsáveis		Observações
+10					Decoração	Alimentação							Decoração	Alimentação
+11	8.0	Sala 7 e 8 e quadra	19h00	Salgadinhos de festa	Rafael B	Beatriz			10.0
+12	Informal								Culto Conecte
+13	Dia	Local	Horário	Comida	Responsáveis		Observações		Dia	Local	Horário	Comida	Responsáveis		Observações
+14					Decoração	Alimentação							Decoração	Alimentação
+15	15.0								17.0	EJ	19h00	Cachorro quente	Nicholas	Carla
+16	Churrasco dos homens (conferência das mulheres)								Noite de jogos
+17	Dia	Local	Horário	Comida	Responsáveis		Observações		Dia	Local	Horário	Comida	Responsáveis		Observações
+18					Decoração	Alimentação							Decoração	Alimentação
+19	22.0	Casa do Dinnout?	12h00	Churrasco	-	-			24.0			Salgadinhos de festa	Rafael	Isabela S
+20	Culto Conecte								Semana da solidariedade
+21	Dia	Local	Horário	Comida	Responsáveis		Observações		Dia	Local	Horário	Comida	Responsáveis		Observações
+22					Decoração	Alimentação							Decoração	Alimentação
+23	29.0			Cachorro quente	Nicholas	Carla			31.0
+25	Setembro								Novembro
+28	Acampa Conecte								Culto Conecte
+29	Dia	Local	Horário	Comida	Responsáveis		Observações		Dia	Local	Horário	Comida	Responsáveis		Observações
+30					Decoração	Alimentação							Decoração	Alimentação
+31	5.0								7.0			Pizza	Isabela L	Rafael B
+32	Informal								DayCamp com impulse
+33	Dia	Local	Horário	Comida	Responsáveis		Observações		Dia	Local	Horário	Comida	Responsáveis		Observações
+34					Decoração	Alimentação							Decoração	Alimentação
+35	12.0								14.0			Eles que mandam	Beatriz	Rafael B
+36	Culto Conecte								Culto Conecte
+37	Dia	Local	Horário	Comida	Responsáveis		Observações		Dia	Local	Horário	Comida	Responsáveis		Observações
+38					Decoração	Alimentação							Decoração	Alimentação
+39	19.0	EJ	19h00	Pizza	Isabela S	Rafael			21.0	EJ	19h00	Esfihas	Nicholas	Carla
+40	Planejamento								Festa de encerramento
+41	Dia	Local	Horário	Comida	Responsáveis		Observações		Dia	Local	Horário	Comida	Responsáveis		Observações
+42					Decoração	Alimentação							Decoração	Alimentação
+43	26.0	Sala 7	19h00	Esfihas (picolé?)	Beatriz	Isabela L			28.0			Lanche comunitário?	Isabela S	Rafael
