@@ -146,3 +146,5 @@ function LegendRow({
     </div>
   );
 }
+
+export default EventValueChart;

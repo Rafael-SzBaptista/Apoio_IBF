@@ -19,7 +19,7 @@ import { ASSIGNMENT_AREA, ASSIGNMENT_AREAS, assignmentAreaLabel, DEFAULT_TASKS, 
 import { parseQuantity, buildShoppingList } from "@/lib/apoio-utils";
 import { cn } from "@/lib/utils";
 import { usePrices, type MenuWithIngredients } from "@/hooks/use-data";
-import { EventValueChart } from "@/components/event-value-chart";
+import { EventValueChart } from "@/components/event-value-chart.lazy";
 
 function foldText(value: string) {
   return value

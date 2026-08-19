@@ -75,11 +75,12 @@ export function HomeMascot() {
         />
 
         <img
-          src="/logo%20prancheta.png"
+          src="/logo-prancheta-lg.png"
           alt="Prancheta do Ministério Apoio"
-          width={1145}
-          height={1374}
+          width={667}
+          height={800}
           decoding="async"
+          fetchPriority="high"
           draggable={false}
           className="relative h-56 w-auto select-none drop-shadow-sm sm:h-72 lg:h-[22rem] xl:h-[26rem]"
         />
@@ -91,8 +92,8 @@ export function HomeMascot() {
             style={{
               background:
                 "radial-gradient(circle at var(--gx, 50%) var(--gy, 35%), rgba(255,255,255,0.55), transparent 42%)",
-              maskImage: "url('/logo%20prancheta.png')",
-              WebkitMaskImage: "url('/logo%20prancheta.png')",
+              maskImage: "url('/logo-prancheta-lg.png')",
+              WebkitMaskImage: "url('/logo-prancheta-lg.png')",
               maskSize: "contain",
               WebkitMaskSize: "contain",
               maskRepeat: "no-repeat",
@@ -138,3 +139,5 @@ export function HomeMascot() {
     </aside>
   );
 }
+
+export default HomeMascot;

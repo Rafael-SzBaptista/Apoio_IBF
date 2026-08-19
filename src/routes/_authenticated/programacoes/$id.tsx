@@ -22,7 +22,7 @@ import { useIsAdmin } from "@/hooks/use-session";
 import { assignmentAreaLabel, isEventCompleted, SAFETY_TAX, SAFETY_TAX_PERCENT } from "@/lib/constants";
 import { BRL, buildShoppingList, weekday } from "@/lib/apoio-utils";
 import { cn } from "@/lib/utils";
-import { EventValueChart } from "@/components/event-value-chart";
+import { EventValueChart } from "@/components/event-value-chart.lazy";
 
 export const Route = createFileRoute("/_authenticated/programacoes/$id")({
   ssr: false,

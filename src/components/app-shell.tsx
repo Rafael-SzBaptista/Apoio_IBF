@@ -357,8 +357,11 @@ function Brand({ collapsed }: { collapsed?: boolean } = {}) {
       title={collapsed ? "Apoio" : undefined}
     >
       <img
-        src="/logo%20prancheta.png"
+        src="/logo-prancheta-sm.png"
         alt={collapsed ? "Apoio" : ""}
+        width={80}
+        height={96}
+        decoding="async"
         className={cn("shrink-0 object-contain", collapsed ? "size-14" : "h-12 w-auto max-h-12")}
       />
       {!collapsed && (

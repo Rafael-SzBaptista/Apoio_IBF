@@ -93,6 +93,40 @@ async function loadEventShoppingItems(
   return refreshed.data ?? [];
 }
 
+async function loadEventDecorations(eventId: string): Promise<Tables<"event_decorations">[]> {
+  const decorations = await supabase
+    .from("event_decorations")
+    .select("id, title, sort_order, notes, inventory_item_id")
+    .eq("event_id", eventId)
+    .order("sort_order");
+  if (!decorations.error) return decorations.data ?? [];
+  if (isMissingRelation(decorations.error)) return [];
+
+  const fallback = await supabase
+    .from("event_decorations")
+    .select("id, title, sort_order")
+    .eq("event_id", eventId)
+    .order("sort_order");
+  if (fallback.error) {
+    if (!isMissingRelation(fallback.error)) throw decorations.error;
+    return [];
+  }
+  return (fallback.data ?? []).map((item) => ({
+    ...item,
+    notes: null,
+    inventory_item_id: null,
+  }));
+}
+
+async function loadEventPhotoPath(eventId: string): Promise<string | null> {
+  const photo = await supabase.from("event_photos").select("path").eq("event_id", eventId).maybeSingle();
+  if (photo.error) {
+    if (!isMissingRelation(photo.error)) throw photo.error;
+    return null;
+  }
+  return photo.data?.path ?? null;
+}
+
 export function useEvents() {
   const ready = useAuthReady();
   return useQuery({
@@ -142,45 +176,14 @@ export function useEvent(id: string | undefined) {
       if (error) throw error;
       if (!data) return null;
 
-      let event_decorations: Tables<"event_decorations">[] = [];
-      const decorations = await supabase
-        .from("event_decorations")
-        .select("id, title, sort_order, notes, inventory_item_id")
-        .eq("event_id", id!)
-        .order("sort_order");
-      if (decorations.error) {
-        if (!isMissingRelation(decorations.error)) {
-          const fallback = await supabase
-            .from("event_decorations")
-            .select("id, title, sort_order")
-            .eq("event_id", id!)
-            .order("sort_order");
-          if (fallback.error) {
-            if (!isMissingRelation(fallback.error)) throw decorations.error;
-          } else {
-            event_decorations = (fallback.data ?? []).map((item) => ({
-              ...item,
-              notes: null,
-              inventory_item_id: null,
-            }));
-          }
-        }
-      } else {
-        event_decorations = decorations.data ?? [];
-      }
-
       const ingredients = [...(data.menus?.menu_ingredients ?? [])].sort(
         (a, b) => a.sort_order - b.sort_order,
       );
-      const event_shopping_items = await loadEventShoppingItems(id!, ingredients);
-
-      let event_photo_path: string | null = null;
-      const photo = await supabase.from("event_photos").select("path").eq("event_id", id!).maybeSingle();
-      if (photo.error) {
-        if (!isMissingRelation(photo.error)) throw photo.error;
-      } else {
-        event_photo_path = photo.data?.path ?? null;
-      }
+      const [event_decorations, event_shopping_items, event_photo_path] = await Promise.all([
+        loadEventDecorations(id!),
+        loadEventShoppingItems(id!, ingredients),
+        loadEventPhotoPath(id!),
+      ]);
 
       return { ...data, event_decorations, event_shopping_items, event_photo_path } as EventDetail;
     },

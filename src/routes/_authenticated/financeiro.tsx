@@ -2,13 +2,13 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
 import { Plus, Wallet } from "lucide-react";
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import { DatePicker } from "@/components/date-time-fields";
 import { FileField, StoredFileButton } from "@/components/file-field";
 import { AppShell } from "@/components/app-shell";
 import { DbBanner, EmptyState, Field, PageSkeleton, SearchField, SidePanel, TableDeleteButton, TablePager } from "@/components/apoio-ui";
 import { MobileRecordCard, MobileRecordList } from "@/mobile";
 import { SummaryDonut } from "@/components/summary-donut";
+import { FinanceMonthlyChart } from "@/components/finance-monthly-chart.lazy";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -19,7 +19,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { supabase } from "@/integrations/supabase/client";
 import { removePrivateFile, uploadPrivateFile } from "@/lib/storage";
 import { useEvents, useFinance, type FinanceListItem } from "@/hooks/use-data";
@@ -376,30 +375,7 @@ function FinanceiroPage() {
           <div className="grid items-start gap-8 lg:grid-cols-3">
             <div className="min-w-0 lg:col-span-2">
               <h2 className="font-display text-lg font-semibold">Balanço mensal</h2>
-              <ChartContainer
-                className="mt-3 aspect-auto h-64 w-full"
-                config={{
-                  receitas: { label: "Receitas", color: "var(--color-success)" },
-                  gastos: { label: "Gastos", color: "var(--color-primary)" },
-                }}
-              >
-                <BarChart data={chart}>
-                  <CartesianGrid vertical={false} />
-                  <XAxis dataKey="mes" tickLine={false} axisLine={false} />
-                  <YAxis
-                    tickLine={false}
-                    axisLine={false}
-                    width={52}
-                    tickFormatter={(value) =>
-                      Number(value).toLocaleString("pt-BR", { maximumFractionDigits: 0 })
-                    }
-                  />
-                  <ChartTooltip content={<ChartTooltipContent />} />
-                  <ChartLegend content={<ChartLegendContent />} />
-                  <Bar dataKey="receitas" fill="var(--color-receitas)" radius={4} />
-                  <Bar dataKey="gastos" fill="var(--color-gastos)" radius={4} />
-                </BarChart>
-              </ChartContainer>
+              <FinanceMonthlyChart data={chart} />
             </div>
 
             <div className="min-w-0">

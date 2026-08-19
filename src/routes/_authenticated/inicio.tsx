@@ -1,14 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CalendarDays, Receipt, Wallet, type LucideIcon } from "lucide-react";
-import type { ReactNode } from "react";
+import { lazy, Suspense, type ReactNode } from "react";
 import { AppShell } from "@/components/app-shell";
 import { DbBanner, PageSkeleton } from "@/components/apoio-ui";
 import { SummaryDonut } from "@/components/summary-donut";
-import { HomeMascot } from "@/components/home-mascot";
 import { useEvents, useFinance, scopeEventsForUser, type FinanceListItem } from "@/hooks/use-data";
 import { useCurrentMember, useIsAdmin } from "@/hooks/use-session";
 import { isEventCompleted } from "@/lib/constants";
 import { BRL, todayIso } from "@/lib/apoio-utils";
+
+const HomeMascot = lazy(() => import("@/components/home-mascot"));
 
 export const Route = createFileRoute("/_authenticated/inicio")({
   ssr: false,
@@ -129,7 +130,9 @@ function InicioPage() {
             </div>
           </div>
 
-          <HomeMascot />
+          <Suspense fallback={<div className="min-h-[16rem] lg:min-h-[22rem]" />}>
+            <HomeMascot />
+          </Suspense>
         </div>
       )}
     </AppShell>

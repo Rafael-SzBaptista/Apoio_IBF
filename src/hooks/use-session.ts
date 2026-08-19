@@ -8,11 +8,10 @@ export function useSession() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
-      setSession(data.session);
+    const { data } = supabase.auth.onAuthStateChange((_event, next) => {
+      setSession(next);
       setLoading(false);
     });
-    const { data } = supabase.auth.onAuthStateChange((_e, s) => setSession(s));
     return () => data.subscription.unsubscribe();
   }, []);
 
@@ -25,6 +24,7 @@ export function useIsAdmin() {
   const { data } = useQuery({
     queryKey: ["is-admin", userId],
     enabled: !!userId,
+    staleTime: 5 * 60_000,
     queryFn: async () => {
       const { data } = await supabase
         .from("user_roles")
@@ -44,6 +44,7 @@ export function useCurrentMember() {
   return useQuery({
     queryKey: ["current-member", userId],
     enabled: !!userId,
+    staleTime: 5 * 60_000,
     queryFn: async () => {
       const { data } = await supabase
         .from("members")
