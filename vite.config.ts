@@ -16,7 +16,7 @@ const SERVER_ENV_KEYS = [
 
 function stubDefaultCsrf(code: string) {
   const next = code.replace(
-    /(?:var|const|let) defaultCsrfMiddleware = createCsrfMiddleware\([^;]+\)/,
+    /(?:var|const|let) defaultCsrfMiddleware = createCsrfMiddleware\(\{\s*filter:\s*\(ctx\)\s*=>\s*ctx\.handlerType\s*===\s*["']serverFn["']\s*\}\)/,
     'var defaultCsrfMiddleware = { options: { type: "request", server: (ctx) => ctx.next() } }',
   );
   if (next === code) return;
@@ -36,10 +36,9 @@ export default defineConfig({
         enforce: "pre",
         transform(code, id) {
           const file = id.replaceAll("\\", "/");
-          if (!file.includes("/@tanstack/start-server-core/")) return;
-          return stubDefaultCsrf(code);
-        },
-        renderChunk(code) {
+          if (!file.includes("/@tanstack/start-server-core/") || !file.includes("createStartHandler")) {
+            return;
+          }
           return stubDefaultCsrf(code);
         },
       },
