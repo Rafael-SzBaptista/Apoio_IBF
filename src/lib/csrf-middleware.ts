@@ -1,5 +1,3 @@
-import { createMiddleware } from "@tanstack/react-start";
-
 const csrfSymbol = Symbol.for("tanstack-start:csrf-middleware");
 
 type CsrfContext = {
@@ -8,15 +6,20 @@ type CsrfContext = {
   next: () => Promise<unknown>;
 };
 
+/** Plain request middleware — avoids TanStack's broken `createMiddleware` export on Vercel. */
+export function requestMiddleware(server: (ctx: any) => unknown | Promise<unknown>) {
+  return { options: { type: "request" as const, server } };
+}
+
 /**
- * Local CSRF factory. The official `createCsrfMiddleware` is an isomorphic
- * helper that Nitro/Vite drops in the Vercel SSR bundle (`is not a function`).
+ * Local CSRF factory. The official helper crashes in the Nitro/Vercel bundle
+ * (`createCsrfMiddleware` / `createMiddleware` is not a function).
  */
 export function createCsrfMiddleware(opts: {
   filter?: (ctx: CsrfContext) => boolean | Promise<boolean>;
 } = {}) {
-  const middleware = createMiddleware().server(async (ctx) => {
-    const csrfCtx = ctx as unknown as CsrfContext;
+  const middleware = requestMiddleware(async (ctx) => {
+    const csrfCtx = ctx as CsrfContext;
     if (opts.filter && !(await opts.filter(csrfCtx))) return ctx.next();
     if (isCsrfRequestAllowed(csrfCtx)) return ctx.next();
     return new Response("Forbidden", { status: 403 });

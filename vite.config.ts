@@ -14,6 +14,15 @@ const SERVER_ENV_KEYS = [
   "SUPABASE_PROJECT_ID",
 ];
 
+function stubDefaultCsrf(code: string) {
+  const next = code.replace(
+    /(?:var|const|let) defaultCsrfMiddleware = createCsrfMiddleware\([^;]+\)/,
+    'var defaultCsrfMiddleware = { options: { type: "request", server: (ctx) => ctx.next() } }',
+  );
+  if (next === code) return;
+  return { code: next, map: null };
+}
+
 export default defineConfig({
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
@@ -22,6 +31,18 @@ export default defineConfig({
   },
   vite: {
     plugins: [
+      {
+        name: "stub-tanstack-eager-csrf",
+        enforce: "pre",
+        transform(code, id) {
+          const file = id.replaceAll("\\", "/");
+          if (!file.includes("/@tanstack/start-server-core/")) return;
+          return stubDefaultCsrf(code);
+        },
+        renderChunk(code) {
+          return stubDefaultCsrf(code);
+        },
+      },
       {
         name: "supabase-server-env",
         config(_, { mode }) {
