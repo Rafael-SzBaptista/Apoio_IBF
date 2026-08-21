@@ -14,16 +14,22 @@ import {
   ChevronDown,
   ChevronLeft,
   ChevronRight,
+  Check,
+  Moon,
+  Sun,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useCurrentMember, useIsAdmin } from "@/hooks/use-session";
+import { useTheme } from "@/hooks/use-theme";
 import { cn } from "@/lib/utils";
-import { MobileNav } from "@/mobile";
+import { MobileNav, MobileProfileButton } from "@/mobile";
+import { AppLogo } from "@/components/app-logo";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
@@ -134,14 +140,30 @@ export function AppShell({
   return (
     <div className="min-h-svh bg-background lg:flex lg:h-svh lg:overflow-hidden">
       <TooltipProvider delayDuration={0}>
-        <aside
-          className={cn(
-            "relative hidden h-svh shrink-0 flex-col border-r border-sidebar-border bg-sidebar lg:flex",
-            sidebarReady && "transition-[width] duration-200 ease-in-out",
-            collapsed ? "w-[4.5rem] px-1.5 py-4" : "w-56 p-3",
-          )}
-        >
-          <Brand collapsed={collapsed} />
+        <div className="relative z-40 hidden h-svh shrink-0 lg:block">
+          <aside
+            className={cn(
+              "flex h-full flex-col overflow-hidden border-r border-sidebar-border bg-sidebar",
+              sidebarReady && "transition-[width] duration-200 ease-in-out",
+              collapsed ? "w-[4.5rem] px-1.5 py-4" : "w-56 p-3",
+            )}
+          >
+            <Brand collapsed={collapsed} />
+            <div
+              className={cn(
+                "mt-6 min-h-0 flex-1 overflow-x-hidden overflow-y-auto scrollbar-none",
+                collapsed && "w-full",
+              )}
+            >
+              {renderNav(collapsed)}
+            </div>
+            <Footer
+              member={member?.full_name}
+              isAdmin={isAdmin}
+              collapsed={collapsed}
+              onSignOut={signOut}
+            />
+          </aside>
           <button
             type="button"
             onClick={toggleCollapsed}
@@ -150,16 +172,7 @@ export function AppShell({
           >
             {collapsed ? <ChevronRight className="size-4" /> : <ChevronLeft className="size-4" />}
           </button>
-          <div className={cn("mt-6 min-h-0 flex-1 overflow-y-auto", collapsed && "w-full")}>
-            {renderNav(collapsed)}
-          </div>
-          <Footer
-            member={member?.full_name}
-            isAdmin={isAdmin}
-            collapsed={collapsed}
-            onSignOut={signOut}
-          />
-        </aside>
+        </div>
       </TooltipProvider>
 
       <main
@@ -177,7 +190,31 @@ export function AppShell({
             wide ? "max-w-none px-3 sm:px-3 lg:px-4 xl:px-5 2xl:px-6" : "max-w-6xl px-4 sm:px-5",
           )}
         >
-          {actions && <div className="mb-4 flex flex-wrap justify-end gap-2">{actions}</div>}
+          <div
+            className={cn(
+              "mb-10 flex items-center gap-2",
+              actions ? "lg:mb-4 lg:justify-end" : "lg:hidden",
+            )}
+          >
+            <AppLogo
+              alt="Ministério Apoio"
+              width={80}
+              height={96}
+              className="mr-auto h-10 w-auto shrink-0 object-contain lg:hidden"
+            />
+            {actions ? (
+              <div className="hidden flex-wrap justify-end gap-2 lg:flex">{actions}</div>
+            ) : null}
+            <div className="lg:hidden">
+              <MobileProfileButton
+                member={member?.full_name ?? null}
+                isAdmin={isAdmin}
+                onSignOut={() => {
+                  void signOut();
+                }}
+              />
+            </div>
+          </div>
           {fill ? (
             <div className="lg:flex lg:h-full lg:min-h-0 lg:flex-1 lg:flex-col lg:overflow-hidden">
               {children}
@@ -356,12 +393,11 @@ function Brand({ collapsed }: { collapsed?: boolean } = {}) {
       className={cn("flex items-center", collapsed ? "justify-center" : "gap-2")}
       title={collapsed ? "Apoio" : undefined}
     >
-      <img
-        src="/logo-prancheta-sm.png"
+      <AppLogo
         alt={collapsed ? "Apoio" : ""}
         width={80}
         height={96}
-        decoding="async"
+        variant="white"
         className={cn("shrink-0 object-contain", collapsed ? "size-14" : "h-12 w-auto max-h-12")}
       />
       {!collapsed && (
@@ -382,6 +418,7 @@ function Footer({
   collapsed?: boolean;
   onSignOut: () => void;
 }) {
+  const { theme, setTheme } = useTheme();
   const initials = (member ?? "M")
     .split(" ")
     .filter(Boolean)
@@ -394,6 +431,20 @@ function Footer({
     <span className="grid size-9 shrink-0 place-items-center rounded-full bg-sidebar-accent text-xs font-semibold text-sidebar-accent-foreground">
       {initials}
     </span>
+  );
+
+  const themeItems = (
+    <>
+      <DropdownMenuItem onClick={() => setTheme("light")}>
+        <Sun className="size-4" /> Claro
+        {theme === "light" ? <Check className="ml-auto size-4" /> : null}
+      </DropdownMenuItem>
+      <DropdownMenuItem onClick={() => setTheme("dark")}>
+        <Moon className="size-4" /> Escuro
+        {theme === "dark" ? <Check className="ml-auto size-4" /> : null}
+      </DropdownMenuItem>
+      <DropdownMenuSeparator />
+    </>
   );
 
   if (collapsed) {
@@ -410,6 +461,7 @@ function Footer({
             </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent side="right" align="end">
+            {themeItems}
             <DropdownMenuItem onClick={onSignOut}>
               <LogOut className="size-4" /> Sair
             </DropdownMenuItem>
@@ -440,6 +492,7 @@ function Footer({
           </button>
         </DropdownMenuTrigger>
         <DropdownMenuContent side="top" align="start" className="w-48">
+          {themeItems}
           <DropdownMenuItem onClick={onSignOut}>
             <LogOut className="size-4" /> Sair
           </DropdownMenuItem>

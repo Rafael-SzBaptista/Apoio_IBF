@@ -24,7 +24,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/apoio-ui";
-import { MobileRecordCard, MobileRecordList } from "@/mobile";
+import { MobileCardapioTabs, MobileRecordCard, MobileRecordList } from "@/mobile";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { usePrices } from "@/hooks/use-data";
@@ -137,6 +137,7 @@ function CardapioPrecosPage() {
         ) : undefined
       }
     >
+      <MobileCardapioTabs />
       {prices.isLoading ? (
         <PageSkeleton />
       ) : (prices.data ?? []).length === 0 ? (
@@ -155,7 +156,21 @@ function CardapioPrecosPage() {
       ) : (
         <>
           <div className="mb-4 flex items-center gap-2">
-            <SearchField value={priceQ} onChange={setPriceQ} />
+            <SearchField
+              value={priceQ}
+              onChange={setPriceQ}
+              className="w-full min-w-0 flex-1 lg:w-60 lg:flex-none"
+            />
+            {isAdmin ? (
+              <Button
+                size="icon"
+                className="size-9 shrink-0 lg:hidden"
+                aria-label="Novo preço"
+                onClick={openNewPrice}
+              >
+                <Plus className="size-4" />
+              </Button>
+            ) : null}
           </div>
           <div className="hidden lg:block">
           <ListTable>

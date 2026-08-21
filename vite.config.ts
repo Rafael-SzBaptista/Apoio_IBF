@@ -4,8 +4,13 @@
 //     nitro (build-only using cloudflare as a default target), VITE_* env injection, @ path alias,
 //     React/TanStack dedupe, error logger plugins, and sandbox detection (port/host/strictPort).
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 import { loadEnv } from "vite";
+
+const rootDir = path.dirname(fileURLToPath(import.meta.url));
+const browserStorageStub = path.resolve(rootDir, "src/lib/start-storage-context.browser.ts");
 
 const SERVER_ENV_KEYS = [
   "SUPABASE_URL",
@@ -30,7 +35,20 @@ export default defineConfig({
     server: { entry: "server" },
   },
   vite: {
+    optimizeDeps: {
+      // Avoid esbuild prebundling the Node ALS storage into the browser graph.
+      exclude: ["@tanstack/start-storage-context", "@tanstack/start-client-core"],
+    },
     plugins: [
+      {
+        name: "stub-start-storage-context-browser",
+        enforce: "pre",
+        resolveId(source, _importer, options) {
+          if (source === "@tanstack/start-storage-context" && !options?.ssr) {
+            return browserStorageStub;
+          }
+        },
+      },
       {
         name: "stub-tanstack-eager-csrf",
         enforce: "pre",

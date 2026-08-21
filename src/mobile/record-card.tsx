@@ -19,7 +19,7 @@ export function MobileRecordCard({
   onClick?: () => void;
 }) {
   const className = cn(
-    "grid w-full grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1 rounded-xl border bg-card px-4 py-3 text-left",
+    "grid w-full grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 gap-y-0.5 rounded-xl border bg-card px-4 py-1.5 text-left",
     onClick && "cursor-pointer transition-colors hover:bg-secondary/40",
   );
 

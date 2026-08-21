@@ -10,6 +10,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
   Select,
   SelectContent,
   SelectItem,
@@ -207,10 +213,33 @@ function AlmoxarifadoPage() {
     >
       {inventory.error && <DbBanner error={inventory.error} />}
       {sectorsQuery.error && <DbBanner error={sectorsQuery.error} />}
-      <div className="mb-4 flex items-center gap-2">
-        <SearchField value={q} onChange={setQ} />
+      <div className="mb-4 space-y-2">
+        <div className="flex items-center gap-2">
+          <SearchField
+            value={q}
+            onChange={setQ}
+            className="w-full min-w-0 flex-1 lg:w-60 lg:flex-none"
+          />
+          {isAdmin ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button size="icon" className="size-9 shrink-0 lg:hidden" aria-label="Criar">
+                  <Plus className="size-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={() => setSectorOpen(true)}>
+                  <Plus className="size-4" /> Novo setor
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={openNew}>
+                  <Plus className="size-4" /> Novo item
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : null}
+        </div>
         <Select value={sector} onValueChange={setSector}>
-          <SelectTrigger className="w-auto min-w-40">
+          <SelectTrigger className="w-full min-w-0 sm:w-auto sm:min-w-40">
             <SelectValue placeholder="Setor" />
           </SelectTrigger>
           <SelectContent>

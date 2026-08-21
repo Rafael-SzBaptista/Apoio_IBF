@@ -3,6 +3,7 @@ import { CalendarDays, Receipt, Wallet, type LucideIcon } from "lucide-react";
 import { lazy, Suspense, type ReactNode } from "react";
 import { AppShell } from "@/components/app-shell";
 import { DbBanner, PageSkeleton } from "@/components/apoio-ui";
+import { Card } from "@/components/ui/card";
 import { SummaryDonut } from "@/components/summary-donut";
 import { useEvents, useFinance, scopeEventsForUser, type FinanceListItem } from "@/hooks/use-data";
 import { useCurrentMember, useIsAdmin } from "@/hooks/use-session";
@@ -35,13 +36,18 @@ function Stat({
   hint: ReactNode;
 }) {
   return (
-    <div className="py-4 first:pt-0">
-      <p className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-        <Icon className="size-4" /> {label}
-      </p>
-      <div className="mt-1 font-display text-xl font-semibold">{value}</div>
-      <p className="mt-1 text-sm text-muted-foreground">{hint}</p>
-    </div>
+    <Card className="min-w-0 px-2 py-2 lg:rounded-none lg:border-x-0 lg:border-b-0 lg:border-border/40 lg:bg-transparent lg:p-0 lg:py-4 lg:shadow-none lg:first:border-t-0 lg:first:pt-0">
+      <div className="flex flex-col items-center gap-1 text-center lg:block lg:text-left">
+        <Icon className="size-3.5 shrink-0 text-muted-foreground lg:hidden" />
+        <p className="line-clamp-2 text-[10px] font-medium leading-tight text-muted-foreground lg:mt-0 lg:flex lg:items-center lg:gap-2 lg:text-sm lg:leading-normal">
+          <Icon className="hidden size-4 lg:inline" /> {label}
+        </p>
+        <div className="line-clamp-2 w-full font-display text-xs font-semibold leading-tight lg:mt-1 lg:line-clamp-none lg:truncate lg:text-xl lg:leading-normal">
+          {value}
+        </div>
+        <p className="mt-1 hidden text-sm text-muted-foreground lg:block">{hint}</p>
+      </div>
+    </Card>
   );
 }
 
@@ -72,15 +78,15 @@ function InicioPage() {
   const loading = events.isLoading || finance.isLoading;
 
   return (
-    <AppShell>
+    <AppShell wide>
       {events.error && <DbBanner error={events.error} />}
       {finance.error && <DbBanner error={finance.error} />}
       {loading ? (
         <PageSkeleton />
       ) : (
-        <div className="grid items-center gap-10 lg:grid-cols-[minmax(16rem,22rem)_minmax(0,1fr)] lg:gap-8">
-          <div className="space-y-8">
-            <div className="max-w-sm divide-y divide-border/40 border-l border-primary/40 pl-5">
+        <div className="grid items-center gap-3 lg:grid-cols-[minmax(16rem,22rem)_minmax(0,1fr)] lg:gap-8">
+          <div className="space-y-3 lg:space-y-8">
+            <div className="grid grid-cols-3 gap-2 lg:max-w-sm lg:grid-cols-1 lg:gap-0 lg:border-l lg:border-primary/40 lg:pl-5">
               <Stat
                 icon={Wallet}
                 label="Saldo do mês"
@@ -111,7 +117,7 @@ function InicioPage() {
               />
             </div>
 
-            <div className="flex max-w-md gap-8 pl-5">
+            <Card className="flex w-full items-center justify-center gap-4 px-3 py-4 lg:max-w-md lg:justify-start lg:gap-8 lg:border-0 lg:bg-transparent lg:p-0 lg:pl-5 lg:shadow-none">
               <SummaryDonut
                 size="sm"
                 label="Abertas"
@@ -127,10 +133,10 @@ function InicioPage() {
                 fill="var(--color-success)"
                 caption={doneEvents === 1 ? "programação finalizada" : "programações finalizadas"}
               />
-            </div>
+            </Card>
           </div>
 
-          <Suspense fallback={<div className="min-h-[16rem] lg:min-h-[22rem]" />}>
+          <Suspense fallback={<div className="min-h-10 lg:min-h-[22rem]" />}>
             <HomeMascot />
           </Suspense>
         </div>

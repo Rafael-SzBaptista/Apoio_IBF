@@ -112,7 +112,7 @@ function ProgramacoesPage() {
       wide
       actions={
         isAdmin ? (
-          <Button asChild>
+          <Button asChild className="hidden lg:inline-flex">
             <Link to="/programacoes/nova">
               <Plus className="size-4" /> Nova programação
             </Link>
@@ -122,27 +122,43 @@ function ProgramacoesPage() {
     >
       {events.error && <DbBanner error={events.error} />}
 
-      <div className="mb-4 flex flex-wrap items-center gap-2">
-        <SearchField value={q} onChange={setQ} />
-        <DatePicker
-          className="w-[10.75rem]"
-          value={date}
-          onChange={setDate}
-          placeholder="Filtrar data"
-        />
-        <Select value={statusFilter} onValueChange={setStatusFilter}>
-          <SelectTrigger className="w-auto min-w-40">
-            <SelectValue placeholder="Status" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">Todos os status</SelectItem>
-            {EVENT_STATUS.map((status) => (
-              <SelectItem key={status.value} value={status.value}>
-                {status.value === "aberta" ? "Abertas" : "Concluídas"}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+      <div className="mb-4 space-y-2">
+        <div className="flex items-center gap-2">
+          <SearchField value={q} onChange={setQ} className="w-full min-w-0 flex-1 lg:w-60 lg:flex-none" />
+          {isAdmin ? (
+            <Button
+              asChild
+              size="icon"
+              className="size-9 shrink-0 lg:hidden"
+              aria-label="Nova programação"
+            >
+              <Link to="/programacoes/nova">
+                <Plus className="size-4" />
+              </Link>
+            </Button>
+          ) : null}
+        </div>
+        <div className="flex flex-wrap items-center gap-2">
+          <DatePicker
+            className="min-w-0 flex-1 sm:w-[10.75rem] sm:flex-none"
+            value={date}
+            onChange={setDate}
+            placeholder="Filtrar data"
+          />
+          <Select value={statusFilter} onValueChange={setStatusFilter}>
+            <SelectTrigger className="min-w-0 flex-1 sm:w-auto sm:min-w-40 sm:flex-none">
+              <SelectValue placeholder="Status" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">Todos os status</SelectItem>
+              {EVENT_STATUS.map((status) => (
+                <SelectItem key={status.value} value={status.value}>
+                  {status.value === "aberta" ? "Abertas" : "Concluídas"}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
       </div>
 
       {events.isLoading || authLoading || memberPending ? (

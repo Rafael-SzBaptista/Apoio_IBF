@@ -162,11 +162,32 @@ function EquipePage() {
           icon={Users}
           title="Nenhum membro cadastrado"
           description="O administrador já está cadastrado. Convide o restante da equipe pelo e-mail."
+          action={
+            isAdmin ? (
+              <Button onClick={openNew}>
+                <Plus className="size-4" /> Convidar
+              </Button>
+            ) : undefined
+          }
         />
       ) : (
         <>
-          <div className="mb-4 flex items-center justify-start gap-2">
-            <SearchField value={q} onChange={setQ} />
+          <div className="mb-4 flex items-center gap-2">
+            <SearchField
+              value={q}
+              onChange={setQ}
+              className="w-full min-w-0 flex-1 lg:w-60 lg:flex-none"
+            />
+            {isAdmin ? (
+              <Button
+                size="icon"
+                className="size-9 shrink-0 lg:hidden"
+                aria-label="Convidar"
+                onClick={openNew}
+              >
+                <Plus className="size-4" />
+              </Button>
+            ) : null}
           </div>
           <div className="hidden overflow-x-auto lg:block">
             <table className="w-full text-left text-sm">

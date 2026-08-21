@@ -10,6 +10,7 @@ import { MobileRecordCard, MobileRecordList } from "@/mobile";
 import { SummaryDonut } from "@/components/summary-donut";
 import { FinanceMonthlyChart } from "@/components/finance-monthly-chart.lazy";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -303,10 +304,10 @@ function FinanceiroPage() {
       ) : (
         <div className="space-y-8">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <h1 className="font-display text-2xl font-semibold">Financeiro</h1>
+            <h1 className="hidden font-display text-2xl font-semibold lg:block">Financeiro</h1>
             <div className="flex flex-wrap items-center gap-2">
               <Select value={year} onValueChange={setYear}>
-                <SelectTrigger className="h-8 w-[4.75rem] px-2.5 text-xs">
+                <SelectTrigger className="h-9 w-[4.75rem] shrink-0 px-2.5 text-xs sm:h-8">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -318,7 +319,7 @@ function FinanceiroPage() {
                 </SelectContent>
               </Select>
               <Select value={eventId} onValueChange={setEventId}>
-                <SelectTrigger className="h-8 w-[12.25rem] px-2.5 text-xs">
+                <SelectTrigger className="h-9 min-w-0 flex-1 px-2.5 text-xs sm:h-8 sm:w-[12.25rem] sm:flex-none">
                   <SelectValue placeholder="Todas as programações" />
                 </SelectTrigger>
                 <SelectContent>
@@ -331,86 +332,119 @@ function FinanceiroPage() {
                 </SelectContent>
               </Select>
               {isAdmin && (
-                <Button onClick={openNew}>
-                  <Plus className="size-4" /> Novo lançamento
-                </Button>
+                <>
+                  <Button
+                    size="icon"
+                    className="size-9 shrink-0 sm:hidden"
+                    aria-label="Novo lançamento"
+                    onClick={openNew}
+                  >
+                    <Plus className="size-4" />
+                  </Button>
+                  <Button className="hidden sm:inline-flex" onClick={openNew}>
+                    <Plus className="size-4" /> Novo lançamento
+                  </Button>
+                </>
               )}
             </div>
           </div>
 
-          <div key={year} className="grid gap-6 sm:grid-cols-3">
-            <SummaryDonut
-              label={`Receita ${year}`}
-              display={BRL.format(receitas)}
-              fill="var(--color-success)"
-              caption={
-                receitaDelta == null
-                  ? `sem dados de ${Number(year) - 1}`
-                  : `${receitaDelta >= 0 ? "+" : ""}${receitaDelta.toFixed(0)}% vs ${Number(year) - 1}`
-              }
-              captionClassName={
-                receitaDelta == null
-                  ? "text-muted-foreground"
-                  : receitaDelta >= 0
-                    ? "text-success"
-                    : "text-destructive"
-              }
-            />
-            <SummaryDonut
-              delayMs={120}
-              label={`Gastos ${year}`}
-              display={BRL.format(gastos)}
-              fill="var(--color-primary)"
-              caption={`${pending.length} ${pending.length === 1 ? "reembolso pendente" : "reembolsos pendentes"}`}
-            />
-            <SummaryDonut
-              delayMs={240}
-              label={`Saldo ${year}`}
-              display={BRL.format(receitas - gastos)}
-              fill={receitas - gastos >= 0 ? "var(--color-success)" : "var(--color-primary)"}
-              caption="caixa atual"
-            />
-          </div>
+          <Card
+            key={year}
+            className="p-4 sm:border-0 sm:bg-transparent sm:p-0 sm:shadow-none"
+          >
+            <div className="grid gap-6 sm:grid-cols-3">
+              <SummaryDonut
+                label={`Receita ${year}`}
+                display={BRL.format(receitas)}
+                fill="var(--color-success)"
+                caption={
+                  receitaDelta == null
+                    ? `sem dados de ${Number(year) - 1}`
+                    : `${receitaDelta >= 0 ? "+" : ""}${receitaDelta.toFixed(0)}% vs ${Number(year) - 1}`
+                }
+                captionClassName={
+                  receitaDelta == null
+                    ? "text-muted-foreground"
+                    : receitaDelta >= 0
+                      ? "text-success"
+                      : "text-destructive"
+                }
+              />
+              <SummaryDonut
+                delayMs={120}
+                label={`Gastos ${year}`}
+                display={BRL.format(gastos)}
+                fill="var(--color-primary)"
+                caption={`${pending.length} ${pending.length === 1 ? "reembolso pendente" : "reembolsos pendentes"}`}
+              />
+              <SummaryDonut
+                delayMs={240}
+                label={`Saldo ${year}`}
+                display={BRL.format(receitas - gastos)}
+                fill={receitas - gastos >= 0 ? "var(--color-success)" : "var(--color-primary)"}
+                caption="caixa atual"
+              />
+            </div>
+          </Card>
 
           <div className="grid items-start gap-8 lg:grid-cols-3">
-            <div className="min-w-0 lg:col-span-2">
+            <div className="hidden min-w-0 lg:col-span-2 lg:block">
               <h2 className="font-display text-lg font-semibold">Balanço mensal</h2>
               <FinanceMonthlyChart data={chart} />
             </div>
 
             <div className="min-w-0">
               <h2 className="font-display text-lg font-semibold">Reembolsos pendentes</h2>
-              <div
-                className={cn(
-                  "mt-3 space-y-1",
-                  pending.length > 5 && "max-h-[21.25rem] overflow-y-auto pr-1",
-                )}
-              >
-                {pending.length === 0 ? (
-                  <p className="text-sm text-muted-foreground">Nenhum reembolso pendente.</p>
-                ) : (
-                  pending.map((row) => (
-                    <div
-                      key={row.id}
-                      className="flex cursor-pointer items-start justify-between gap-3 border-b py-2.5 last:border-b-0 hover:bg-secondary/50"
-                      onClick={() => openEdit(row)}
-                    >
-                      <div className="min-w-0">
-                        <p className="truncate text-sm font-medium">{row.description}</p>
-                        <p className="truncate text-xs text-muted-foreground">
-                          {row.events?.title ?? "Sem programação"}
-                        </p>
-                      </div>
-                      <div className="shrink-0 text-right">
-                        <p className="text-sm font-medium">{BRL.format(Number(row.amount))}</p>
-                        <div className="mt-1 flex justify-end">
-                          <ReimbursementBadge status={row.reimbursement_status} />
+              {pending.length === 0 ? (
+                <p className="mt-3 text-sm text-muted-foreground">Nenhum reembolso pendente.</p>
+              ) : (
+                <>
+                  <div
+                    className={cn(
+                      "mt-3 hidden space-y-1 lg:block",
+                      pending.length > 5 && "max-h-[21.25rem] overflow-y-auto pr-1",
+                    )}
+                  >
+                    {pending.map((row) => (
+                      <div
+                        key={row.id}
+                        className="flex cursor-pointer items-start justify-between gap-3 border-b py-2.5 last:border-b-0 hover:bg-secondary/50"
+                        onClick={() => openEdit(row)}
+                      >
+                        <div className="min-w-0">
+                          <p className="truncate text-sm font-medium">{row.description}</p>
+                          <p className="truncate text-xs text-muted-foreground">
+                            {row.events?.title ?? "Sem programação"}
+                          </p>
+                        </div>
+                        <div className="shrink-0 text-right">
+                          <p className="text-sm font-medium">{BRL.format(Number(row.amount))}</p>
+                          <div className="mt-1 flex justify-end">
+                            <ReimbursementBadge status={row.reimbursement_status} />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))
-                )}
-              </div>
+                    ))}
+                  </div>
+                  <div className="mt-3">
+                    <MobileRecordList>
+                      {pending.map((row) => (
+                        <MobileRecordCard
+                          key={row.id}
+                          topLeft={row.description}
+                          bottomLeft={row.events?.title ?? "Sem programação"}
+                          topRight={
+                            <span className="font-medium">{BRL.format(Number(row.amount))}</span>
+                          }
+                          bottomRight={<ReimbursementBadge status={row.reimbursement_status} />}
+                          onClick={() => openEdit(row)}
+                        />
+                      ))}
+                    </MobileRecordList>
+                  </div>
+                </>
+              )}
             </div>
           </div>
 

@@ -63,13 +63,15 @@ export function SearchField({
   value,
   onChange,
   label = "Buscar",
+  className,
 }: {
   value: string;
   onChange: (value: string) => void;
   label?: string;
+  className?: string;
 }) {
   return (
-    <div className="relative w-60 shrink-0">
+    <div className={cn("relative w-60 shrink-0", className)}>
       <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
       <Input
         className="pl-9"

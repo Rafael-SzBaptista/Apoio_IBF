@@ -12,12 +12,12 @@
   "lang": "pt-BR",
   "icons": [
     {
-      "src": "/clipboard_checklist.ico",
+      "src": "/favicon_corvo_branco_48px.ico",
       "sizes": "48x48",
       "type": "image/x-icon"
     },
     {
-      "src": "/logo%20prancheta.png",
+      "src": "/logo.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"

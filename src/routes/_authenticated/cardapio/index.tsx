@@ -25,7 +25,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/apoio-ui";
-import { MobileRecordCard, MobileRecordList } from "@/mobile";
+import { MobileCardapioTabs, MobileRecordCard, MobileRecordList } from "@/mobile";
 import { Button } from "@/components/ui/button";
 import { useMenus, type MenuWithIngredients } from "@/hooks/use-data";
 import { usePagedList } from "@/hooks/use-paged-list";
@@ -96,6 +96,7 @@ function CardapioAlimentacoesPage() {
         ) : undefined
       }
     >
+      <MobileCardapioTabs />
       {menus.error && <DbBanner error={menus.error} />}
       {menus.isLoading ? (
         <PageSkeleton />
@@ -117,7 +118,18 @@ function CardapioAlimentacoesPage() {
       ) : (
         <>
           <div className="mb-4 flex items-center gap-2">
-            <SearchField value={menuQ} onChange={setMenuQ} />
+            <SearchField
+              value={menuQ}
+              onChange={setMenuQ}
+              className="w-full min-w-0 flex-1 lg:w-60 lg:flex-none"
+            />
+            {isAdmin ? (
+              <Button asChild size="icon" className="size-9 shrink-0 lg:hidden" aria-label="Nova alimentação">
+                <Link to="/cardapio/nova">
+                  <Plus className="size-4" />
+                </Link>
+              </Button>
+            ) : null}
           </div>
           <div className="hidden lg:block">
           <ListTable>

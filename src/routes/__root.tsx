@@ -13,6 +13,7 @@ import { supabase } from "@/integrations/supabase/client";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { THEME_INIT_SCRIPT } from "@/hooks/use-theme";
 
 function NotFoundComponent() {
   return (
@@ -95,8 +96,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap",
       },
-      { rel: "icon", href: "/clipboard_checklist.ico", sizes: "any" },
-      { rel: "apple-touch-icon", href: "/clipboard_checklist.ico" },
+      { rel: "icon", href: "/favicon_corvo_branco_48px.ico", sizes: "any" },
+      { rel: "apple-touch-icon", href: "/favicon_corvo_branco_48px.ico" },
       { rel: "manifest", href: "/manifest.webmanifest" },
     ],
   }),
@@ -108,9 +109,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" suppressHydrationWarning>
       <head>
         <HeadContent />
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
       </head>
       <body>
         {children}
