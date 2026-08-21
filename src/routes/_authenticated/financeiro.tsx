@@ -616,6 +616,28 @@ function FinanceiroPage() {
                       }
                       bottomRight={row.entry_date.split("-").reverse().join("/")}
                       onClick={() => openEdit(row)}
+                      action={
+                        isAdmin ? (
+                          <TableDeleteButton
+                            title="Excluir este lançamento?"
+                            description="O registro será removido do financeiro. Essa ação não pode ser desfeita."
+                            onConfirm={async () => {
+                              if (row.receipt_path) {
+                                await supabase.storage.from("notas").remove([row.receipt_path]);
+                              }
+                              const { error } = await supabase
+                                .from("finance_entries")
+                                .delete()
+                                .eq("id", row.id);
+                              if (error) toast.error(error.message);
+                              else {
+                                toast.success("Lançamento excluído.");
+                                queryClient.invalidateQueries({ queryKey: ["finance"] });
+                              }
+                            }}
+                          />
+                        ) : undefined
+                      }
                     />
                   ))}
                 </MobileRecordList>

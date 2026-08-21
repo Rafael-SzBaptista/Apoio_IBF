@@ -250,6 +250,25 @@ function CardapioPrecosPage() {
                   }
                   bottomRight={`${row.pack_quantity} ${row.unit}`}
                   onClick={() => openEditPrice(row)}
+                  action={
+                    isAdmin ? (
+                      <TableDeleteButton
+                        title="Excluir este preço?"
+                        description="O ingrediente será removido da tabela de preços."
+                        onConfirm={async () => {
+                          const { error } = await supabase
+                            .from("ingredient_prices")
+                            .delete()
+                            .eq("id", row.id);
+                          if (error) toast.error(error.message);
+                          else {
+                            toast.success("Preço excluído.");
+                            refreshPrices();
+                          }
+                        }}
+                      />
+                    ) : undefined
+                  }
                 />
               ))}
             </MobileRecordList>

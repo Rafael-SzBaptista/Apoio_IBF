@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import { toast } from "sonner";
 import { ClipboardList, Plus, Trash2 } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
-import { DbBanner, EmptyState, Field, PageSkeleton, SearchField, SidePanel, StatusBadge, TablePager } from "@/components/apoio-ui";
+import { DbBanner, EmptyState, Field, PageSkeleton, SearchField, SidePanel, StatusBadge, TableDeleteButton, TablePager } from "@/components/apoio-ui";
 import { MobileRecordCard, MobileRecordList } from "@/mobile";
 import { usePagedList } from "@/hooks/use-paged-list";
 import { DatePicker } from "@/components/date-time-fields";
@@ -304,6 +304,15 @@ function ProgramacoesPage() {
                 topRight={<StatusBadge status={event.status} />}
                 bottomRight={formatTableDate(event.event_date)}
                 onClick={() => setSelected(event)}
+                action={
+                  isAdmin ? (
+                    <TableDeleteButton
+                      title="Excluir esta programação?"
+                      description="Tarefas, escala e possíveis decorações também serão removidas."
+                      onConfirm={() => deleteEvent(event.id)}
+                    />
+                  ) : undefined
+                }
               />
             ))}
           </MobileRecordList>

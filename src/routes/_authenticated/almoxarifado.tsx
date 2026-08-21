@@ -386,6 +386,26 @@ function AlmoxarifadoPage() {
                 }
                 bottomRight={item.location ?? "—"}
                 onClick={() => openEdit(item)}
+                action={
+                  isAdmin ? (
+                    <TableDeleteButton
+                      title="Excluir este item?"
+                      description="O item será removido do almoxarifado."
+                      onConfirm={async () => {
+                        const { error } = await supabase
+                          .from("inventory_items")
+                          .delete()
+                          .eq("id", item.id);
+                        if (error) toast.error(error.message);
+                        else {
+                          if (item.image_url) await removePrivateFile("inventario", item.image_url);
+                          toast.success("Item excluído.");
+                          refresh();
+                        }
+                      }}
+                    />
+                  ) : undefined
+                }
               />
             ))}
           </MobileRecordList>

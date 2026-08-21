@@ -10,17 +10,25 @@ export function MobileRecordCard({
   bottomLeft,
   topRight,
   bottomRight,
+  action,
   onClick,
 }: {
   topLeft: ReactNode;
   bottomLeft: ReactNode;
   topRight: ReactNode;
   bottomRight: ReactNode;
+  action?: ReactNode;
   onClick?: () => void;
 }) {
   const className = cn(
-    "grid w-full grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 gap-y-0.5 rounded-xl border bg-card px-4 py-1.5 text-left",
-    onClick && "cursor-pointer transition-colors hover:bg-secondary/40",
+    "flex w-full items-center rounded-xl border bg-card py-1.5 text-left",
+    action ? "pl-4 pr-2" : "px-4",
+    onClick && "transition-colors hover:bg-secondary/40",
+  );
+
+  const contentClassName = cn(
+    "grid min-w-0 flex-1 grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 gap-y-0.5",
+    onClick && "cursor-pointer",
   );
 
   const body = (
@@ -32,11 +40,16 @@ export function MobileRecordCard({
     </>
   );
 
-  if (!onClick) return <div className={className}>{body}</div>;
-
   return (
-    <button type="button" className={className} onClick={onClick}>
-      {body}
-    </button>
+    <div className={className}>
+      {onClick ? (
+        <button type="button" className={contentClassName} onClick={onClick}>
+          {body}
+        </button>
+      ) : (
+        <div className={contentClassName}>{body}</div>
+      )}
+      {action ? <div className="shrink-0">{action}</div> : null}
+    </div>
   );
 }

@@ -290,6 +290,22 @@ function EquipePage() {
                   }
                   bottomRight={member.phone ?? "—"}
                   onClick={() => openEdit(member)}
+                  action={
+                    isAdmin && !(member.user_id && member.user_id === session?.user.id) ? (
+                      <TableDeleteButton
+                        title="Excluir este membro?"
+                        description="O membro perderá o convite e precisará ser cadastrado novamente."
+                        onConfirm={async () => {
+                          const { error } = await supabase.from("members").delete().eq("id", member.id);
+                          if (error) toast.error(error.message);
+                          else {
+                            toast.success("Membro excluído.");
+                            refresh();
+                          }
+                        }}
+                      />
+                    ) : undefined
+                  }
                 />
               ))}
             </MobileRecordList>

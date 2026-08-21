@@ -223,6 +223,23 @@ function CardapioAlimentacoesPage() {
                     menu.charged_price_per_person,
                   )}
                   onClick={() => setSelected(menu)}
+                  action={
+                    isAdmin ? (
+                      <TableDeleteButton
+                        title="Excluir esta alimentação?"
+                        description="A receita e os ingredientes serão removidos do cardápio."
+                        onConfirm={async () => {
+                          const { error } = await supabase.from("menus").delete().eq("id", menu.id);
+                          if (error) toast.error(error.message);
+                          else {
+                            toast.success("Alimentação excluída.");
+                            if (selected?.id === menu.id) setSelected(null);
+                            queryClient.invalidateQueries({ queryKey: ["menus"] });
+                          }
+                        }}
+                      />
+                    ) : undefined
+                  }
                 />
               ))}
             </MobileRecordList>
