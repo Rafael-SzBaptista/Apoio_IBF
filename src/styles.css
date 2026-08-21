@@ -144,6 +144,14 @@
 html.capacitor-native {
   --safe-top: max(env(safe-area-inset-top, 0px), 2.75rem);
   --safe-bottom: max(env(safe-area-inset-bottom, 0px), 3.25rem);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html.capacitor-native::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 @layer base {
@@ -217,6 +225,20 @@ html.capacitor-native {
     height: 0 !important;
   }
 
+  html.capacitor-native,
+  html.capacitor-native * {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+
+  html.capacitor-native::-webkit-scrollbar,
+  html.capacitor-native *::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
@@ -247,5 +269,26 @@ html.capacitor-native {
   -ms-overflow-style: none;
   &::-webkit-scrollbar {
     display: none;
+    width: 0;
+    height: 0;
   }
+}
+
+/* Cabeçalho mobile: o recorte do blur some numa fumaça, sem linha reta. */
+.mobile-header-veil {
+  pointer-events: none;
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: calc(100% + 2.75rem);
+  background: linear-gradient(
+    to bottom,
+    color-mix(in oklch, var(--color-background) 92%, transparent) 0%,
+    color-mix(in oklch, var(--color-background) 58%, transparent) 58%,
+    transparent 100%
+  );
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 42%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 42%, transparent 100%);
 }

@@ -3,6 +3,7 @@
 export { canUseWebCamera, WebCameraDialog } from "./capture-photo";
 export { WEB_GALLERY_ACCEPT, WebGalleryInput } from "./gallery";
 export { MobileCardapioTabs } from "./cardapio-tabs";
+export { MobileHeader } from "./header";
 export { MobileNav } from "./nav";
 export { MobileProfileButton } from "./profile-button";
 export { MobileRecordCard, MobileRecordList } from "./record-card";

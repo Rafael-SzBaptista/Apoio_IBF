@@ -22,7 +22,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useCurrentMember, useIsAdmin } from "@/hooks/use-session";
 import { useTheme } from "@/hooks/use-theme";
 import { cn } from "@/lib/utils";
-import { MobileNav, MobileProfileButton } from "@/mobile";
+import { MobileHeader, MobileNav } from "@/mobile";
 import { AppLogo } from "@/components/app-logo";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import {
@@ -183,38 +183,16 @@ export function AppShell({
       >
         <div
           className={cn(
-            "mx-auto w-full pt-[calc(0.75rem+var(--safe-top))] sm:pt-[calc(1rem+var(--safe-top))] lg:pt-[calc(1rem+var(--safe-top))]",
+            "mx-auto w-full pt-[calc(6rem+var(--safe-top))] sm:pt-[calc(6.25rem+var(--safe-top))] lg:pt-[calc(1rem+var(--safe-top))]",
             fill
               ? "pb-[calc(5rem+var(--safe-bottom))] sm:pb-[calc(7rem+var(--safe-bottom))] lg:flex lg:h-full lg:min-h-0 lg:flex-col lg:overflow-hidden lg:pb-8"
               : "pb-[calc(5rem+var(--safe-bottom))] sm:pb-[calc(7rem+var(--safe-bottom))] lg:pb-32",
             wide ? "max-w-none px-3 sm:px-3 lg:px-4 xl:px-5 2xl:px-6" : "max-w-6xl px-4 sm:px-5",
           )}
         >
-          <div
-            className={cn(
-              "mb-10 flex items-center gap-2",
-              actions ? "lg:mb-4 lg:justify-end" : "lg:hidden",
-            )}
-          >
-            <AppLogo
-              alt="Ministério Apoio"
-              width={80}
-              height={96}
-              className="mr-auto h-10 w-auto shrink-0 object-contain lg:hidden"
-            />
-            {actions ? (
-              <div className="hidden flex-wrap justify-end gap-2 lg:flex">{actions}</div>
-            ) : null}
-            <div className="lg:hidden">
-              <MobileProfileButton
-                member={member?.full_name ?? null}
-                isAdmin={isAdmin}
-                onSignOut={() => {
-                  void signOut();
-                }}
-              />
-            </div>
-          </div>
+          {actions ? (
+            <div className="mb-4 hidden flex-wrap justify-end gap-2 lg:flex">{actions}</div>
+          ) : null}
           {fill ? (
             <div className="lg:flex lg:h-full lg:min-h-0 lg:flex-1 lg:flex-col lg:overflow-hidden">
               {children}
@@ -225,6 +203,13 @@ export function AppShell({
         </div>
       </main>
 
+      <MobileHeader
+        member={member?.full_name ?? null}
+        isAdmin={isAdmin}
+        onSignOut={() => {
+          void signOut();
+        }}
+      />
       <MobileNav />
     </div>
   );
