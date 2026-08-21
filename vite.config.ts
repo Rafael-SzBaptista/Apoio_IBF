@@ -29,12 +29,24 @@ function stubDefaultCsrf(code: string) {
 }
 
 export default defineConfig({
+  // Lovable defaults Nitro to Cloudflare; on Vercel pin the Node preset so SSR
+  // output lands in `.vercel/output` instead of a Workers bundle.
+  nitro: process.env.VERCEL ? { preset: "vercel" } : undefined,
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
   },
   vite: {
+    build: {
+      rolldownOptions: {
+        output: {
+          // Prevent Rolldown from placing `__exportAll` across a circular chunk
+          // boundary (blank page on Vercel: "TypeError: __exportAll is not a function").
+          strictExecutionOrder: true,
+        },
+      },
+    },
     optimizeDeps: {
       // Avoid esbuild prebundling the Node ALS storage into the browser graph.
       exclude: ["@tanstack/start-storage-context", "@tanstack/start-client-core"],

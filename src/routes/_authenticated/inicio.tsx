@@ -1,5 +1,13 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { CalendarDays, Receipt, Wallet, type LucideIcon } from "lucide-react";
+import { Link, createFileRoute } from "@tanstack/react-router";
+import {
+  BarChart3,
+  CalendarDays,
+  Check,
+  ChevronRight,
+  Receipt,
+  Wallet,
+  type LucideIcon,
+} from "lucide-react";
 import { lazy, Suspense, type ReactNode } from "react";
 import { AppShell } from "@/components/app-shell";
 import { DbBanner, PageSkeleton } from "@/components/apoio-ui";
@@ -9,6 +17,7 @@ import { useEvents, useFinance, scopeEventsForUser, type FinanceListItem } from 
 import { useCurrentMember, useIsAdmin } from "@/hooks/use-session";
 import { isEventCompleted } from "@/lib/constants";
 import { BRL, todayIso } from "@/lib/apoio-utils";
+import { cn } from "@/lib/utils";
 
 const HomeMascot = lazy(() => import("@/components/home-mascot"));
 
@@ -24,29 +33,146 @@ function isPendingReimbursement(row: FinanceListItem) {
   );
 }
 
-function Stat({
+function MobileStat({
   icon: Icon,
   label,
   value,
-  hint,
 }: {
   icon: LucideIcon;
   label: string;
   value: ReactNode;
-  hint: ReactNode;
 }) {
   return (
-    <Card className="min-w-0 px-2 py-2 lg:rounded-none lg:border-x-0 lg:border-b-0 lg:border-border/40 lg:bg-transparent lg:p-0 lg:py-4 lg:shadow-none lg:first:border-t-0 lg:first:pt-0">
-      <div className="flex flex-col items-center gap-1 text-center lg:block lg:text-left">
-        <Icon className="size-3.5 shrink-0 text-muted-foreground lg:hidden" />
-        <p className="line-clamp-2 text-[10px] font-medium leading-tight text-muted-foreground lg:mt-0 lg:flex lg:items-center lg:gap-2 lg:text-sm lg:leading-normal">
-          <Icon className="hidden size-4 lg:inline" /> {label}
+    <Card className="min-w-0 px-2 py-2">
+      <div className="flex flex-col items-center gap-1 text-center">
+        <Icon className="size-3.5 shrink-0 text-primary" />
+        <p className="line-clamp-2 text-[10px] font-medium leading-tight text-muted-foreground">{label}</p>
+        <div className="line-clamp-2 w-full font-display text-xs font-semibold leading-tight">{value}</div>
+      </div>
+    </Card>
+  );
+}
+
+function DesktopInsight({
+  icon: Icon,
+  iconWrap,
+  label,
+  value,
+  hint,
+  featured,
+  action,
+  trailing,
+}: {
+  icon: LucideIcon;
+  iconWrap: string;
+  label: string;
+  value: ReactNode;
+  hint: ReactNode;
+  featured?: boolean;
+  action?: ReactNode;
+  trailing?: ReactNode;
+}) {
+  return (
+    <Card
+      className={cn(
+        "flex items-center gap-4 rounded-2xl border-0 p-4 shadow-sm",
+        featured
+          ? "bg-sidebar text-sidebar-foreground"
+          : "bg-card",
+      )}
+    >
+      <span className={cn("grid size-12 shrink-0 place-items-center rounded-2xl", iconWrap)}>
+        <Icon className="size-5" />
+      </span>
+      <div className="min-w-0 flex-1">
+        <p
+          className={cn(
+            "text-sm font-medium",
+            featured ? "text-sidebar-foreground/70" : "text-muted-foreground",
+          )}
+        >
+          {label}
         </p>
-        <div className="line-clamp-2 w-full font-display text-xs font-semibold leading-tight lg:mt-1 lg:line-clamp-none lg:truncate lg:text-xl lg:leading-normal">
+        <div
+          className={cn(
+            "mt-0.5 truncate font-display text-2xl font-semibold leading-tight",
+            featured && "text-sidebar-foreground",
+          )}
+        >
           {value}
         </div>
-        <p className="mt-1 hidden text-sm text-muted-foreground lg:block">{hint}</p>
+        <p
+          className={cn(
+            "mt-1 truncate text-sm",
+            featured ? "text-sidebar-foreground/75" : "text-muted-foreground",
+          )}
+        >
+          {hint}
+        </p>
       </div>
+      {action}
+      {trailing}
+    </Card>
+  );
+}
+
+function PillLink({
+  to,
+  params,
+  className,
+  children,
+}: {
+  to: "/financeiro" | "/programacoes" | "/programacoes/$id";
+  params?: { id: string };
+  className: string;
+  children: ReactNode;
+}) {
+  return (
+    <Link
+      to={to}
+      params={params}
+      className={cn(
+        "inline-flex shrink-0 items-center gap-0.5 rounded-full px-3 py-1.5 text-xs font-semibold transition-colors",
+        className,
+      )}
+    >
+      {children}
+      <ChevronRight className="size-3.5" />
+    </Link>
+  );
+}
+
+function DonutCard({
+  label,
+  display,
+  fill,
+  caption,
+  delayMs,
+  badge: Badge,
+  badgeClass,
+}: {
+  label: string;
+  display: number;
+  fill: string;
+  caption: string;
+  delayMs?: number;
+  badge: LucideIcon;
+  badgeClass: string;
+}) {
+  return (
+    <Card className="relative rounded-2xl border-0 p-4 shadow-sm">
+      <span className={cn("absolute top-3 right-3 grid size-8 place-items-center rounded-xl", badgeClass)}>
+        <Badge className="size-4" />
+      </span>
+      <SummaryDonut
+        hideLabel
+        size="sm"
+        delayMs={delayMs}
+        label={label}
+        display={display}
+        fill={fill}
+        caption={caption}
+      />
     </Card>
   );
 }
@@ -76,6 +202,9 @@ function InicioPage() {
   const doneEvents = visible.filter((event) => isEventCompleted(event.status)).length;
 
   const loading = events.isLoading || finance.isLoading;
+  const nextHint = next
+    ? `${next.event_date.split("-").reverse().join("/")}${next.food_label ? ` · ${next.food_label}` : ""}`
+    : "Nenhuma programação futura cadastrada.";
 
   return (
     <AppShell wide>
@@ -84,29 +213,77 @@ function InicioPage() {
       {loading ? (
         <PageSkeleton />
       ) : (
-        <div className="grid items-center gap-3 lg:grid-cols-[minmax(16rem,22rem)_minmax(0,1fr)] lg:gap-8">
-          <div className="space-y-3 lg:space-y-8">
-            <div className="grid grid-cols-3 gap-2 lg:max-w-sm lg:grid-cols-1 lg:gap-0 lg:border-l lg:border-primary/40 lg:pl-5">
-              <Stat
+        <div className="grid items-start gap-3 lg:grid-cols-[minmax(22rem,34rem)_minmax(0,1fr)] lg:gap-10 xl:gap-14 lg:pt-0">
+          <div className="space-y-3 lg:space-y-4">
+            <div className="grid grid-cols-3 gap-2 lg:hidden">
+              <MobileStat
                 icon={Wallet}
                 label="Saldo do mês"
                 value={BRL.format(receitas - gastos)}
-                hint={`${BRL.format(receitas)} entrada · ${BRL.format(gastos)} saída`}
               />
-
-              <Stat
+              <MobileStat
                 icon={CalendarDays}
                 label="Próxima programação"
                 value={next?.title ?? "Nenhuma no radar"}
+              />
+              <MobileStat
+                icon={Receipt}
+                label="Reembolsos pendentes"
+                value={pendingReimbursements}
+              />
+            </div>
+
+            <div className="hidden space-y-3 lg:block">
+              <DesktopInsight
+                featured
+                icon={Wallet}
+                iconWrap="bg-white/12 text-sidebar-foreground"
+                label="Saldo do mês"
+                value={BRL.format(receitas - gastos)}
                 hint={
-                  next
-                    ? `${next.event_date.split("-").reverse().join("/")}${next.food_label ? ` · ${next.food_label}` : ""}`
-                    : "Nenhuma programação futura cadastrada."
+                  <>
+                    <span className="text-emerald-400">{BRL.format(receitas)} entrada</span>
+                    {" · "}
+                    <span className="text-red-400">{BRL.format(gastos)} saída</span>
+                  </>
+                }
+                trailing={
+                  <Link
+                    to="/financeiro"
+                    aria-label="Abrir financeiro"
+                    className="grid size-10 shrink-0 place-items-center rounded-xl bg-black/25 text-sidebar-foreground/80 transition-colors hover:bg-black/35 hover:text-sidebar-foreground"
+                  >
+                    <BarChart3 className="size-5" />
+                  </Link>
                 }
               />
 
-              <Stat
+              <DesktopInsight
+                icon={CalendarDays}
+                iconWrap="bg-primary/15 text-primary"
+                label="Próxima programação"
+                value={next?.title ?? "Nenhuma no radar"}
+                hint={nextHint}
+                action={
+                  next ? (
+                    <PillLink
+                      to="/programacoes/$id"
+                      params={{ id: next.id }}
+                      className="bg-primary/15 text-primary hover:bg-primary/25"
+                    >
+                      Ver detalhes
+                    </PillLink>
+                  ) : (
+                    <PillLink to="/programacoes" className="bg-primary/15 text-primary hover:bg-primary/25">
+                      Ver escalas
+                    </PillLink>
+                  )
+                }
+              />
+
+              <DesktopInsight
                 icon={Receipt}
+                iconWrap="bg-success/15 text-success"
                 label="Reembolsos pendentes"
                 value={pendingReimbursements}
                 hint={
@@ -114,10 +291,15 @@ function InicioPage() {
                     ? "reembolso a regularizar"
                     : "reembolsos a regularizar"
                 }
+                action={
+                  <PillLink to="/financeiro" className="bg-success/15 text-success hover:bg-success/25">
+                    Regularizar
+                  </PillLink>
+                }
               />
             </div>
 
-            <Card className="flex w-full items-center justify-center gap-4 px-3 py-4 lg:max-w-md lg:justify-start lg:gap-8 lg:border-0 lg:bg-transparent lg:p-0 lg:pl-5 lg:shadow-none">
+            <Card className="flex w-full items-center justify-center px-3 py-4 lg:hidden">
               <SummaryDonut
                 size="sm"
                 label="Abertas"
@@ -125,6 +307,7 @@ function InicioPage() {
                 fill="var(--color-destructive)"
                 caption={openEvents === 1 ? "programação aberta" : "programações abertas"}
               />
+              <div aria-hidden className="mx-3 h-24 w-px shrink-0 self-center bg-border" />
               <SummaryDonut
                 size="sm"
                 delayMs={140}
@@ -134,6 +317,26 @@ function InicioPage() {
                 caption={doneEvents === 1 ? "programação finalizada" : "programações finalizadas"}
               />
             </Card>
+
+            <div className="hidden grid-cols-2 gap-3 lg:grid">
+              <DonutCard
+                label="Abertas"
+                display={openEvents}
+                fill="var(--color-destructive)"
+                caption={openEvents === 1 ? "programação aberta" : "programações abertas"}
+                badge={CalendarDays}
+                badgeClass="bg-destructive/15 text-destructive"
+              />
+              <DonutCard
+                label="Finalizadas"
+                display={doneEvents}
+                fill="var(--color-success)"
+                caption={doneEvents === 1 ? "programação finalizada" : "programações finalizadas"}
+                delayMs={140}
+                badge={Check}
+                badgeClass="bg-success/15 text-success"
+              />
+            </div>
           </div>
 
           <Suspense fallback={<div className="min-h-10 lg:min-h-[22rem]" />}>

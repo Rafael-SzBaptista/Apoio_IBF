@@ -276,6 +276,9 @@ export function EventForm({
     }));
     setAssignMember("");
     setAssignArea("");
+    if (typeof window !== "undefined" && window.matchMedia("(max-width: 1023px)").matches) {
+      toast.success("Criado");
+    }
   };
 
   const addTask = () => {

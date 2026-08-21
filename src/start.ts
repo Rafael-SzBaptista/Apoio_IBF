@@ -1,4 +1,9 @@
-import { createStart } from "@tanstack/react-start";
+// Import from the core package, not `@tanstack/react-start`.
+// The facade does `export * from '@tanstack/start-client-core'`, which Rolldown
+// compiles to `__exportAll`. Combined with Start's `#tanstack-start-entry` cycle
+// (this file), that helper is undefined on Vercel and SSR dies with
+// `TypeError: __exportAll is not a function`.
+import { createStart } from "@tanstack/start-client-core";
 
 import { renderErrorPage } from "./lib/error-page";
 import { createCsrfMiddleware, requestMiddleware } from "./lib/csrf-middleware";

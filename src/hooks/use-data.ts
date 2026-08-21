@@ -127,19 +127,21 @@ async function loadEventPhotoPath(eventId: string): Promise<string | null> {
   return photo.data?.path ?? null;
 }
 
+export async function fetchEvents() {
+  const { data, error } = await supabase
+    .from("events")
+    .select("*, menus(name), event_assignments(id, area, member_id, members(full_name))")
+    .order("event_date", { ascending: true });
+  if (error) throw error;
+  return (data ?? []) as EventListItem[];
+}
+
 export function useEvents() {
   const ready = useAuthReady();
   return useQuery({
     queryKey: ["events"],
     enabled: ready,
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("events")
-        .select("*, menus(name), event_assignments(id, area, member_id, members(full_name))")
-        .order("event_date", { ascending: true });
-      if (error) throw error;
-      return (data ?? []) as EventListItem[];
-    },
+    queryFn: fetchEvents,
   });
 }
 
@@ -190,17 +192,28 @@ export function useEvent(id: string | undefined) {
   });
 }
 
+export async function fetchMembers() {
+  const { data, error } = await supabase.from("members").select("*").order("full_name");
+  if (error) throw error;
+  return data ?? [];
+}
+
 export function useMembers() {
   const ready = useAuthReady();
   return useQuery({
     queryKey: ["members"],
     enabled: ready,
-    queryFn: async () => {
-      const { data, error } = await supabase.from("members").select("*").order("full_name");
-      if (error) throw error;
-      return data ?? [];
-    },
+    queryFn: fetchMembers,
   });
+}
+
+export async function fetchMenus() {
+  const { data, error } = await supabase
+    .from("menus")
+    .select("*, menu_ingredients(*)")
+    .order("name");
+  if (error) throw error;
+  return (data ?? []) as MenuWithIngredients[];
 }
 
 export function useMenus() {
@@ -208,14 +221,7 @@ export function useMenus() {
   return useQuery({
     queryKey: ["menus"],
     enabled: ready,
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("menus")
-        .select("*, menu_ingredients(*)")
-        .order("name");
-      if (error) throw error;
-      return (data ?? []) as MenuWithIngredients[];
-    },
+    queryFn: fetchMenus,
   });
 }
 
@@ -249,20 +255,22 @@ export function usePrices() {
   });
 }
 
+export async function fetchInventory() {
+  const { data, error } = await supabase
+    .from("inventory_items")
+    .select("*")
+    .order("sector")
+    .order("name");
+  if (error) throw error;
+  return data ?? [];
+}
+
 export function useInventory() {
   const ready = useAuthReady();
   return useQuery({
     queryKey: ["inventory"],
     enabled: ready,
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("inventory_items")
-        .select("*")
-        .order("sector")
-        .order("name");
-      if (error) throw error;
-      return data ?? [];
-    },
+    queryFn: fetchInventory,
   });
 }
 
@@ -286,19 +294,21 @@ export function useInventorySectors() {
   });
 }
 
+export async function fetchFinance() {
+  const { data, error } = await supabase
+    .from("finance_entries")
+    .select("*, events(title, event_date)")
+    .order("entry_date", { ascending: false });
+  if (error) throw error;
+  return (data ?? []) as FinanceListItem[];
+}
+
 export function useFinance() {
   const ready = useAuthReady();
   return useQuery({
     queryKey: ["finance"],
     enabled: ready,
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("finance_entries")
-        .select("*, events(title, event_date)")
-        .order("entry_date", { ascending: false });
-      if (error) throw error;
-      return (data ?? []) as FinanceListItem[];
-    },
+    queryFn: fetchFinance,
   });
 }
 

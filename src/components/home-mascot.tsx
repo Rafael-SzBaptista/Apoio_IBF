@@ -1,6 +1,6 @@
 import { useRef, useState, type PointerEvent } from "react";
 import { motion, useReducedMotion, useSpring } from "motion/react";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Heart, User } from "lucide-react";
 import { AppLogo } from "@/components/app-logo";
 import { SidePanel } from "@/components/apoio-ui";
 
@@ -42,6 +42,23 @@ const shineStyle = (maskUrl: string) =>
     mixBlendMode: "soft-light",
   }) as const;
 
+function WhyCrowCard() {
+  return (
+    <div className="mt-2 w-full rounded-2xl bg-secondary px-4 py-4 text-left shadow-sm">
+      <p className="font-display text-base font-bold tracking-tight">Por que um corvo?</p>
+      <div className="mt-3 flex items-start gap-4">
+        <CrowMark />
+        <p className="min-w-0 text-sm leading-relaxed text-foreground/80">
+          O corvo foi escolhido como símbolo do Ministério Apoio porque, depois dos humanos, os
+          corvos são os animais mais inteligentes. Eles representam sabedoria, estratégia e
+          capacidade de resolver problemas — qualidades que refletem o propósito do nosso
+          ministério: apoiar com inteligência, organização e excelência.
+        </p>
+      </div>
+    </div>
+  );
+}
+
 function ProjectAbout() {
   return (
     <div className="space-y-4 text-center">
@@ -59,7 +76,21 @@ function ProjectAbout() {
         </p>
         <p className="pt-1 text-xs text-muted-foreground/80">Autor: Rafael de Souza Baptista</p>
       </div>
+      <WhyCrowCard />
     </div>
+  );
+}
+
+function CrowMark() {
+  return (
+    <img
+      src="/corvo-silhueta.png"
+      alt=""
+      width={96}
+      height={96}
+      className="h-24 w-24 shrink-0 object-contain mix-blend-multiply dark:mix-blend-screen dark:invert"
+      aria-hidden
+    />
   );
 }
 
@@ -115,78 +146,89 @@ export function HomeMascot() {
         <ProjectAbout />
       </SidePanel>
 
-      <aside className="relative hidden flex-col items-center justify-center gap-6 px-2 py-4 lg:flex lg:min-h-[min(36rem,calc(100svh-7rem))]">
-        <motion.div
-          ref={boardRef}
-          className="relative cursor-pointer [transform-style:preserve-3d]"
-          style={
-            reduced
-              ? undefined
-              : { rotateX, rotateY, transformPerspective: 900, transformOrigin: "center" }
-          }
-          whileTap={reduced ? undefined : { scale: 0.98 }}
-          onPointerMove={onPointerMove}
-          onPointerLeave={resetTilt}
-        >
+      <aside className="relative hidden flex-col items-center justify-start gap-5 px-2 lg:flex">
+        <div className="relative">
           <span
             aria-hidden
-            className="absolute bottom-2 left-1/2 h-3 w-[55%] -translate-x-1/2 rounded-full bg-foreground/20 blur-[4px]"
+            className="pointer-events-none absolute left-1/2 top-[42%] h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,color-mix(in_oklch,var(--primary)_28%,transparent)_0%,transparent_68%)] xl:h-64 xl:w-64"
           />
+          <motion.div
+            ref={boardRef}
+            className="relative cursor-pointer [transform-style:preserve-3d]"
+            style={
+              reduced
+                ? undefined
+                : { rotateX, rotateY, transformPerspective: 900, transformOrigin: "center" }
+            }
+            whileTap={reduced ? undefined : { scale: 0.98 }}
+            onPointerMove={onPointerMove}
+            onPointerLeave={resetTilt}
+          >
+            <span
+              aria-hidden
+              className="absolute bottom-2 left-1/2 h-3 w-[55%] -translate-x-1/2 rounded-full bg-foreground/20 blur-[4px]"
+            />
 
-          <AppLogo
-            alt="Logo do Ministério Apoio"
-            width={667}
-            height={800}
-            fetchPriority="high"
-            draggable={false}
-            className="relative h-56 w-auto select-none drop-shadow-sm sm:h-72 lg:h-[22rem] xl:h-[26rem]"
-          />
+            <AppLogo
+              alt="Logo do Ministério Apoio"
+              width={667}
+              height={800}
+              fetchPriority="high"
+              draggable={false}
+              className="relative h-56 w-auto select-none drop-shadow-sm lg:h-56 xl:h-64"
+            />
 
-          {!reduced && (
-            <>
-              <span
-                aria-hidden
-                className="pointer-events-none absolute inset-0 dark:hidden"
-                style={shineStyle("/logo.png")}
-              />
-              <span
-                aria-hidden
-                className="pointer-events-none absolute inset-0 hidden dark:block"
-                style={shineStyle("/imagem_exata_em_branco.png")}
-              />
-            </>
-          )}
-
-          {ITEMS.map((item, index) => (
-            <button
-              key={item.id}
-              type="button"
-              aria-pressed={checked[index]}
-              aria-label={item.label}
-              className="absolute left-[22%] z-10 w-[58%] rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70"
-              style={{ top: item.top, height: item.height }}
-              onClick={() => toggle(index)}
-            >
-              {!checked[index] && (
+            {!reduced && (
+              <>
                 <span
                   aria-hidden
-                  className="absolute top-1/2 left-[1%] flex h-[90%] w-[29%] -translate-y-1/2 items-center justify-center rounded-[22%]"
-                  style={{ background: PAPER }}
-                >
-                  <span className="block size-[78%] rounded-[20%] border-[2.5px] border-[#1A120C] sm:border-[3px]" />
-                </span>
-              )}
-            </button>
-          ))}
-        </motion.div>
+                  className="pointer-events-none absolute inset-0 dark:hidden"
+                  style={shineStyle("/logo.png")}
+                />
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 hidden dark:block"
+                  style={shineStyle("/imagem_exata_em_branco.png")}
+                />
+              </>
+            )}
 
-        <div className="max-w-md space-y-2 text-center">
-          <p className="font-display text-xl font-semibold tracking-tight">Ministério Apoio</p>
-          <p className="text-sm leading-relaxed text-muted-foreground">
+            {ITEMS.map((item, index) => (
+              <button
+                key={item.id}
+                type="button"
+                aria-pressed={checked[index]}
+                aria-label={item.label}
+                className="absolute left-[22%] z-10 w-[58%] rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70"
+                style={{ top: item.top, height: item.height }}
+                onClick={() => toggle(index)}
+              >
+                {!checked[index] && (
+                  <span
+                    aria-hidden
+                    className="absolute top-1/2 left-[1%] flex h-[90%] w-[29%] -translate-y-1/2 items-center justify-center rounded-[22%]"
+                    style={{ background: PAPER }}
+                  >
+                    <span className="block size-[78%] rounded-[20%] border-[2.5px] border-[#1A120C] sm:border-[3px]" />
+                  </span>
+                )}
+              </button>
+            ))}
+          </motion.div>
+        </div>
+
+        <div className="flex max-w-lg flex-col items-center space-y-3 text-center">
+          <p className="font-display text-2xl font-bold tracking-tight">Ministério Apoio</p>
+          <Heart className="size-4 fill-primary text-primary" aria-hidden />
+          <p className="text-sm leading-relaxed text-foreground/80">
             Auxilia na administração e organização do Ministério Apoio dos Jovens da Igreja Batista
             Fonte.
           </p>
-          <p className="pt-1 text-xs text-muted-foreground/80">Autor: Rafael de Souza Baptista</p>
+          <p className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary">
+            <User className="size-3.5" />
+            Autor: Rafael de Souza Baptista
+          </p>
+          <WhyCrowCard />
         </div>
       </aside>
     </>
