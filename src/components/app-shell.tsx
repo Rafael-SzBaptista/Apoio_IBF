@@ -177,16 +177,16 @@ export function AppShell({
 
       <main
         className={cn(
-          "scrollbar-none min-h-0 min-w-0 flex-1 overflow-y-auto pb-28 lg:h-svh lg:pb-0",
+          "scrollbar-none min-h-0 min-w-0 flex-1 overflow-y-auto pb-[calc(7rem+var(--safe-bottom))] lg:h-svh lg:pb-0",
           fill && "lg:overflow-hidden",
         )}
       >
         <div
           className={cn(
-            "mx-auto w-full pt-3 sm:pt-4",
+            "mx-auto w-full pt-[calc(0.75rem+var(--safe-top))] sm:pt-[calc(1rem+var(--safe-top))] lg:pt-[calc(1rem+var(--safe-top))]",
             fill
-              ? "pb-20 sm:pb-28 lg:flex lg:h-full lg:min-h-0 lg:flex-col lg:overflow-hidden lg:pb-8"
-              : "pb-20 sm:pb-28 lg:pb-32",
+              ? "pb-[calc(5rem+var(--safe-bottom))] sm:pb-[calc(7rem+var(--safe-bottom))] lg:flex lg:h-full lg:min-h-0 lg:flex-col lg:overflow-hidden lg:pb-8"
+              : "pb-[calc(5rem+var(--safe-bottom))] sm:pb-[calc(7rem+var(--safe-bottom))] lg:pb-32",
             wide ? "max-w-none px-3 sm:px-3 lg:px-4 xl:px-5 2xl:px-6" : "max-w-6xl px-4 sm:px-5",
           )}
         >

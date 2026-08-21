@@ -127,6 +127,15 @@ function RootComponent() {
   const router = useRouter();
 
   useEffect(() => {
+    const native =
+      /;\s*wv\)/i.test(navigator.userAgent) ||
+      Boolean(
+        (window as { Capacitor?: { isNativePlatform?: () => boolean } }).Capacitor?.isNativePlatform?.(),
+      );
+    document.documentElement.classList.toggle("capacitor-native", native);
+  }, []);
+
+  useEffect(() => {
     const { data } = supabase.auth.onAuthStateChange((event) => {
       if (event !== "SIGNED_IN" && event !== "SIGNED_OUT" && event !== "USER_UPDATED") return;
       router.invalidate();
@@ -143,7 +152,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
-      <Toaster richColors position="top-center" />
+      <Toaster richColors position="top-center" offset="calc(1rem + var(--safe-top))" />
     </QueryClientProvider>
   );
 }

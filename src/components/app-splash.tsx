@@ -6,7 +6,7 @@ export function AppSplash() {
       role="status"
       aria-live="polite"
       aria-label="Carregando o ministério"
-      className="fixed inset-0 z-[100] grid place-items-center bg-[#1A120C]"
+      className="fixed inset-0 z-[100] grid place-items-center bg-[#1A120C] pt-[var(--safe-top)] pb-[var(--safe-bottom)]"
     >
       <AppLogo
         alt="Ministério Apoio"

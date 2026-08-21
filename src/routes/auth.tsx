@@ -167,7 +167,7 @@ function AuthPage() {
   };
 
   return (
-    <main className="relative min-h-svh overflow-hidden bg-background lg:grid lg:grid-cols-[minmax(0,1.05fr)_minmax(24rem,0.95fr)]">
+    <main className="relative min-h-svh overflow-hidden bg-background pt-[var(--safe-top)] pb-[var(--safe-bottom)] lg:grid lg:grid-cols-[minmax(0,1.05fr)_minmax(24rem,0.95fr)] lg:pt-0 lg:pb-0">
       <BrandPanel />
 
       <section className="relative flex min-h-svh flex-col justify-center px-4 py-10 sm:px-8 lg:px-12 xl:px-16">

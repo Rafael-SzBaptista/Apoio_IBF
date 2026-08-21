@@ -23,8 +23,8 @@ export function applyTheme(theme: Theme) {
   }
 }
 
-/** Evita flash de tema errado no primeiro paint. */
-export const THEME_INIT_SCRIPT = `try{if(localStorage.getItem(${JSON.stringify(THEME_STORAGE_KEY)})==="dark")document.documentElement.classList.add("dark")}catch(e){}`;
+/** Evita flash de tema errado no primeiro paint e recua o APK das barras nativas. */
+export const THEME_INIT_SCRIPT = `try{if(localStorage.getItem(${JSON.stringify(THEME_STORAGE_KEY)})==="dark")document.documentElement.classList.add("dark")}catch(e){}try{var ua=navigator.userAgent||"";if(/;\\s*wv\\)/i.test(ua)||(window.Capacitor&&window.Capacitor.isNativePlatform&&window.Capacitor.isNativePlatform()))document.documentElement.classList.add("capacitor-native")}catch(e){}`;
 
 export function useTheme() {
   const [theme, setThemeState] = useState<Theme>("light");
