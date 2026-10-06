@@ -1,4 +1,4 @@
-const CACHE = "apoio-v1";
+const CACHE = "apoio-v2";
 const PRECACHE = [
   "/offline.html",
   "/manifest.webmanifest",

@@ -4,7 +4,7 @@ import { ChevronRight, Heart, User } from "lucide-react";
 import { AppLogo } from "@/components/app-logo";
 import { SidePanel } from "@/components/apoio-ui";
 
-const PAPER = "#FDF6E2";
+const PAPER = "#fbfef9";
 
 const ITEMS = [
   {
@@ -209,7 +209,7 @@ export function HomeMascot() {
                     className="absolute top-1/2 left-[1%] flex h-[90%] w-[29%] -translate-y-1/2 items-center justify-center rounded-[22%]"
                     style={{ background: PAPER }}
                   >
-                    <span className="block size-[78%] rounded-[20%] border-[2.5px] border-[#1A120C] sm:border-[3px]" />
+                    <span className="block size-[78%] rounded-[20%] border-[2.5px] border-[#191923] sm:border-[3px]" />
                   </span>
                 )}
               </button>

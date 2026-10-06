@@ -36,9 +36,9 @@ const schema = z.object({
 });
 
 const PILLARS = [
-  { icon: ClipboardList, title: "Escalas" },
-  { icon: UtensilsCrossed, title: "Cardápio" },
-  { icon: Boxes, title: "Estoque" },
+  { icon: ClipboardList, title: "Escalas", chip: "bg-chart-1 text-[#fbfef9]" },
+  { icon: UtensilsCrossed, title: "Cardápio", chip: "bg-chart-2 text-[#fbfef9]" },
+  { icon: Boxes, title: "Estoque", chip: "bg-chart-3 text-[#191923]" },
 ] as const;
 
 function AuthPage() {
@@ -174,9 +174,12 @@ function AuthPage() {
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 lg:hidden"
-          style={{
-            background:
-              "radial-gradient(ellipse 80% 50% at 50% -10%, color-mix(in oklch, var(--primary) 18%, transparent), transparent 70%)",
+            style={{
+            background: [
+              "radial-gradient(ellipse 70% 42% at 0% -8%, color-mix(in srgb, #0e79b2 28%, transparent), transparent 70%)",
+              "radial-gradient(ellipse 60% 40% at 100% 0%, color-mix(in srgb, #bf1363 22%, transparent), transparent 68%)",
+              "radial-gradient(ellipse 70% 36% at 80% 100%, color-mix(in srgb, #f39237 24%, transparent), transparent 70%)",
+            ].join(","),
           }}
         />
 
@@ -277,7 +280,9 @@ function AuthPage() {
                 key={pillar.title}
                 className="rounded-xl border bg-card/70 px-2 py-3 text-center shadow-sm"
               >
-                <pillar.icon className="mx-auto size-4 text-primary" />
+                <span className={`mx-auto grid size-7 place-items-center rounded-lg ${pillar.chip}`}>
+                  <pillar.icon className="size-4" />
+                </span>
                 <p className="mt-1.5 text-[11px] font-semibold">{pillar.title}</p>
               </li>
             ))}
@@ -296,8 +301,9 @@ function BrandPanel() {
         className="pointer-events-none absolute inset-0 opacity-80"
         style={{
           background: [
-            "radial-gradient(ellipse 70% 55% at 12% 18%, color-mix(in oklch, var(--sidebar-primary) 38%, transparent), transparent 62%)",
-            "radial-gradient(ellipse 50% 40% at 88% 82%, color-mix(in oklch, var(--chart-3) 22%, transparent), transparent 70%)",
+            "radial-gradient(ellipse 62% 48% at 8% 12%, color-mix(in srgb, #0e79b2 55%, transparent), transparent 68%)",
+            "radial-gradient(ellipse 50% 42% at 92% 18%, color-mix(in srgb, #bf1363 48%, transparent), transparent 70%)",
+            "radial-gradient(ellipse 58% 46% at 78% 92%, color-mix(in srgb, #f39237 52%, transparent), transparent 68%)",
           ].join(","),
         }}
       />
@@ -341,17 +347,17 @@ function BrandPanel() {
 
       <ul className="relative space-y-3">
         {PILLARS.map((pillar) => (
-          <PillarRow key={pillar.title} icon={pillar.icon} title={pillar.title} />
+          <PillarRow key={pillar.title} icon={pillar.icon} title={pillar.title} chip={pillar.chip} />
         ))}
       </ul>
     </aside>
   );
 }
 
-function PillarRow({ icon: Icon, title }: { icon: LucideIcon; title: string }) {
+function PillarRow({ icon: Icon, title, chip }: { icon: LucideIcon; title: string; chip: string }) {
   return (
     <li className="flex items-center gap-3 rounded-xl border border-sidebar-border/80 bg-sidebar-accent/50 px-4 py-3">
-      <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-sidebar-primary/20 text-sidebar-primary">
+      <span className={`grid size-8 shrink-0 place-items-center rounded-lg ${chip}`}>
         <Icon className="size-4" />
       </span>
       <p className="text-sm font-semibold">{title}</p>
