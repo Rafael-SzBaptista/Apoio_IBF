@@ -37,15 +37,3 @@ dist-ssr
 *.sln
 *.sw?
 
-# Android / Capacitor
-android/.gradle/
-android/app/build/
-android/build/
-android/captures/
-android/local.properties
-*.apk
-*.aab
-*.ap_
-*.keystore
-*.jks
-

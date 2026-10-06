@@ -14,6 +14,7 @@ import { supabase } from "@/integrations/supabase/client";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { THEME_INIT_SCRIPT } from "@/hooks/use-theme";
+import { registerServiceWorker } from "@/lib/register-pwa";
 
 function NotFoundComponent() {
   return (
@@ -80,7 +81,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
       { title: "Ministério Apoio" },
       { name: "theme-color", content: "#9a5a32" },
+      { name: "mobile-web-app-capable", content: "yes" },
       { name: "apple-mobile-web-app-capable", content: "yes" },
+      { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
+      { name: "apple-mobile-web-app-title", content: "Apoio" },
       {
         name: "description",
         content: "Organização de alimentação e decoração das programações dos jovens da igreja.",
@@ -97,7 +101,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap",
       },
       { rel: "icon", href: "/favicon_corvo_branco_48px.ico", sizes: "any" },
-      { rel: "apple-touch-icon", href: "/favicon_corvo_branco_48px.ico" },
+      { rel: "apple-touch-icon", href: "/icons/apple-touch-icon.png", sizes: "180x180" },
       { rel: "manifest", href: "/manifest.webmanifest" },
     ],
   }),
@@ -127,12 +131,7 @@ function RootComponent() {
   const router = useRouter();
 
   useEffect(() => {
-    const native =
-      /;\s*wv\)/i.test(navigator.userAgent) ||
-      Boolean(
-        (window as { Capacitor?: { isNativePlatform?: () => boolean } }).Capacitor?.isNativePlatform?.(),
-      );
-    document.documentElement.classList.toggle("capacitor-native", native);
+    registerServiceWorker();
   }, []);
 
   useEffect(() => {

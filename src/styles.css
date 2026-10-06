@@ -140,20 +140,6 @@
   --sidebar-ring: oklch(0.68 0.14 42);
 }
 
-/* WebView do APK: env(safe-area-*) costuma vir 0 mesmo com as barras nativas por cima. */
-html.capacitor-native {
-  --safe-top: max(env(safe-area-inset-top, 0px), 2.75rem);
-  --safe-bottom: max(env(safe-area-inset-bottom, 0px), 3.25rem);
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-html.capacitor-native::-webkit-scrollbar {
-  display: none;
-  width: 0;
-  height: 0;
-}
-
 @layer base {
   * {
     border-color: var(--color-border);
@@ -223,20 +209,6 @@ html.capacitor-native::-webkit-scrollbar {
     display: none !important;
     width: 0 !important;
     height: 0 !important;
-  }
-
-  html.capacitor-native,
-  html.capacitor-native * {
-    scrollbar-width: none !important;
-    -ms-overflow-style: none !important;
-  }
-
-  html.capacitor-native::-webkit-scrollbar,
-  html.capacitor-native *::-webkit-scrollbar {
-    display: none !important;
-    width: 0 !important;
-    height: 0 !important;
-    background: transparent !important;
   }
 
   body {
